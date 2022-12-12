@@ -1,26 +1,38 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPowerOff, faFolder, faUser } from "@fortawesome/free-solid-svg-icons";
 import { AnimationGroup } from '../etc/animation';
+import Modal from '../etc/modal';
 
 export default function HomePage() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [folderName, setefolderName] = useState("");
+
+  const openModal = (id) => {
+    setModalOpen(true);
+    setefolderName(id);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <Container>
+      <Modal open={modalOpen} close={closeModal} header={folderName} />
       <Content>
         <LeftBox>
           <MidBox>
-            <MainBox>
-              <Link href="/mypage" className='link-css-box'>
-                <IconBox>
-                  <FontAwesomeIcon icon={faUser} size="3x" color="#81BEF7" />
-                </IconBox>
-                <NameBox>마이페이지</NameBox>
-              </Link>
+            <MainBox onClick={openModal}>
+              <IconBox>
+                <FontAwesomeIcon icon={faUser} size="3x" color="#81BEF7" />
+              </IconBox>
+              <NameBox>마이페이지</NameBox>
             </MainBox>
           </MidBox>
           <MidBox>
-            <MainBox>
+            <MainBox onClick={() => openModal("독수리")}>
               <IconBox>
                 <FontAwesomeIcon icon={faFolder} size="3x" color="#81BEF7" />
               </IconBox>
@@ -28,7 +40,7 @@ export default function HomePage() {
             </MainBox>
           </MidBox>
           <MidBox>
-            <MainBox>
+            <MainBox onClick={() => openModal("꿩")}>
               <IconBox>
                 <FontAwesomeIcon icon={faFolder} size="3x" color="#81BEF7" />
               </IconBox>
