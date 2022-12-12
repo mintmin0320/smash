@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Mypage from '../mypage/mypage';
 
 export default function Modal(props) {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
@@ -19,7 +20,13 @@ export default function Modal(props) {
                 {header}
               </NameBox>
             </MenubarBox>
-            <main>{props.children}</main>
+            <Main>
+              {header === "내정보" && (
+                <MypageBox>
+                  <Mypage />
+                </MypageBox>
+              )}
+            </Main>
           </SectionBox>
         ) : null}
       </div>
@@ -37,11 +44,6 @@ const Container = styled.div`
     left: 0;
     z-index: 99;
     background-color: rgba(0, 0, 0, 0.3);
-  }
-  .modal > section > main {
-    padding: 16px;
-    border-bottom: 1px solid #dee2e6;
-    border-top: 1px solid #dee2e6;
   }
   .modal.openModal {
     display: flex;
@@ -117,5 +119,24 @@ const MenuButton = styled.button`
   background: ${(props => (props.btnColor === "red" ? "#F78181" : props.btnColor === "orange" ? "#F7BE81" : "#01DF01"))};
 `
 
+const Main = styled.button`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border: solid 0;
+`
 
-
+const MypageBox = styled.button`
+  width: 80%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-left: solid 3px #F5F5F5;
+  border-right: solid 3px #F5F5F5;
+  border-top: solid 0;
+`

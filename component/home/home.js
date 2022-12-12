@@ -24,7 +24,7 @@ export default function HomePage() {
       <Content>
         <LeftBox>
           <MidBox>
-            <MainBox onClick={openModal}>
+            <MainBox onClick={() => openModal("내정보")}>
               <IconBox>
                 <FontAwesomeIcon icon={faUser} size="3x" color="#81BEF7" />
               </IconBox>
@@ -48,7 +48,7 @@ export default function HomePage() {
             </MainBox>
           </MidBox>
           <MidBox>
-            <MainBox>
+            <MainBox onClick={() => openModal("닭")}>
               <IconBox>
                 <FontAwesomeIcon icon={faFolder} size="3x" color="#81BEF7" />
               </IconBox>
@@ -56,7 +56,7 @@ export default function HomePage() {
             </MainBox>
           </MidBox>
           <MidBox>
-            <MainBox>
+            <MainBox onClick={() => openModal("따오기")}>
               <IconBox>
                 <FontAwesomeIcon icon={faFolder} size="3x" color="#81BEF7" />
               </IconBox>
