@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPowerOff, faFolder, faUser } from "@fortawesome/free-solid-svg-icons";
-import { AnimationGroup } from '../etc/animation';
-import Modal from '../etc/modal';
+import { AnimationGroup } from '../util/animation';
+import Modal from '../util/modal';
+import axios from 'axios';
 
 export default function HomePage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -17,6 +18,26 @@ export default function HomePage() {
   const closeModal = () => {
     setModalOpen(false);
   };
+
+  useEffect(() => {
+    const a = async () => {
+
+
+      const userInfo = localStorage.getItem('userInfo');
+      const url = `http://localhost:8080/user/`
+      const res = await axios.get(url, {
+        headers: {
+          'Authorization': userInfo
+        }
+      });
+      console.log(res);
+      console.log(res.headers);
+      if (!res.data.result) {
+        location.replace('/login');
+      }
+    }
+    a();
+  })
 
   return (
     <Container>

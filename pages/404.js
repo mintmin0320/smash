@@ -1,4 +1,4 @@
-import { Animation } from '../component/etc/animation'
+import { Animation } from '../component/util/animation'
 import styled from 'styled-components';
 
 export default function ErrorPage() {

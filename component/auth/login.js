@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, use } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
+import { setCookie } from '../util/cookie';
 
 export default function LoginPage() {
   const now = new Date();
@@ -29,38 +30,38 @@ export default function LoginPage() {
   const handleEnterPress = (params, e) => {
     if (e.key === 'Enter' && e.target.value !== '') {
       if (params === 'id') {
-        //handleIdCheck();
-        if (e.target.value === 'hamin') {
-          setState({
-            ...state,
-            idResult: true,
-            idValidation: true,
-          });
-        }
-        else {
-          setState({
-            ...state,
-            idResult: false,
-            idValidation: true,
-          });
-        }
+        handleIdCheck();
+        // if (e.target.value === 'hamin') {
+        //   setState({
+        //     ...state,
+        //     idResult: true,
+        //     idValidation: true,
+        //   });
+        // }
+        // else {
+        //   setState({
+        //     ...state,
+        //     idResult: false,
+        //     idValidation: true,
+        //   });
+        // }
       }
       else {
-        //handlePwCheck();
-        if (e.target.value === '1234') {
-          setState({
-            ...state,
-            pwResult: true,
-            pwValidation: true,
-          });
-        }
-        else {
-          setState({
-            ...state,
-            pwResult: false,
-            pwValidation: true,
-          });
-        }
+        handlePwCheck();
+        // if (e.target.value === '1234') {
+        //   setState({
+        //     ...state,
+        //     pwResult: true,
+        //     pwValidation: true,
+        //   });
+        // }
+        // else {
+        //   setState({
+        //     ...state,
+        //     pwResult: false,
+        //     pwValidation: true,
+        //   });
+        // }
       }
     }
   };
@@ -95,7 +96,7 @@ export default function LoginPage() {
   };
 
   const handlePwCheck = async () => {
-    const url = `http://192.168.219.100:8080/user/pw`
+    const url = `http://localhost:8080/user/pw`
     const params = {
       userId: state.userId,
       userPw: state.userPw,
@@ -104,6 +105,10 @@ export default function LoginPage() {
       const res = await axios.post(url, params);
       console.log(res);
       if (res.data.pwResult) {
+        const jwtToken = res.data.jwtToken;
+        console.log("1" + jwtToken);
+        setCookie('accessJwtToken', jwtToken);
+        localStorage.setItem('userInfo', jwtToken);
         setState({
           ...state,
           pwResult: true,
@@ -163,7 +168,7 @@ export default function LoginPage() {
         </MenubarBox>
         <InputBox>
           <HeaderShellBox>
-            Welcome to My Project!!&nbsp;&nbsp;{nowDate}&nbsp;on console
+            Welcome to SMASH!!&nbsp;&nbsp;{nowDate}&nbsp;on console
           </HeaderShellBox>
           <ShellBox>
             <ShellTextBox textColor={"green"}>login-checking id</ShellTextBox>&nbsp;&nbsp;
@@ -264,7 +269,7 @@ const LoginBox = styled.div`
 
 const MenubarBox = styled.div`
   width: 100%;
-  height: 5%;
+  height: 8%;
   display: flex;
   border-bottom: solid 1px black;
   border-radius: 13px 13px 0px 0px;
@@ -281,8 +286,8 @@ const ButtonBox = styled.div`
 `
 
 const MenuButton = styled.button`
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   display: flex;
   border: solid 1px black;
   border-radius: 50%;

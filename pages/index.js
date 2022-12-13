@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import HomePage from '../component/home/home';
-import Title from '../component/etc/title'
+import Title from '../component/util/title'
 
 export default function Login() {
   return (
