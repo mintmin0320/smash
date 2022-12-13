@@ -139,4 +139,5 @@ const MypageBox = styled.button`
   border-left: solid 3px #F5F5F5;
   border-right: solid 3px #F5F5F5;
   border-top: solid 0;
+  padding: 0;
 `

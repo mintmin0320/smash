@@ -30,38 +30,38 @@ export default function LoginPage() {
   const handleEnterPress = (params, e) => {
     if (e.key === 'Enter' && e.target.value !== '') {
       if (params === 'id') {
-        handleIdCheck();
-        // if (e.target.value === 'hamin') {
-        //   setState({
-        //     ...state,
-        //     idResult: true,
-        //     idValidation: true,
-        //   });
-        // }
-        // else {
-        //   setState({
-        //     ...state,
-        //     idResult: false,
-        //     idValidation: true,
-        //   });
-        // }
+        // handleIdCheck();
+        if (e.target.value === 'hamin') {
+          setState({
+            ...state,
+            idResult: true,
+            idValidation: true,
+          });
+        }
+        else {
+          setState({
+            ...state,
+            idResult: false,
+            idValidation: true,
+          });
+        }
       }
       else {
         handlePwCheck();
-        // if (e.target.value === '1234') {
-        //   setState({
-        //     ...state,
-        //     pwResult: true,
-        //     pwValidation: true,
-        //   });
-        // }
-        // else {
-        //   setState({
-        //     ...state,
-        //     pwResult: false,
-        //     pwValidation: true,
-        //   });
-        // }
+        if (e.target.value === '1234') {
+          setState({
+            ...state,
+            pwResult: true,
+            pwValidation: true,
+          });
+        }
+        else {
+          setState({
+            ...state,
+            pwResult: false,
+            pwValidation: true,
+          });
+        }
       }
     }
   };
@@ -108,7 +108,7 @@ export default function LoginPage() {
         const jwtToken = res.data.jwtToken;
         console.log("1" + jwtToken);
         setCookie('accessJwtToken', jwtToken);
-        localStorage.setItem('userInfo', jwtToken);
+        // localStorage.setItem('userInfo', jwtToken);
         setState({
           ...state,
           pwResult: true,

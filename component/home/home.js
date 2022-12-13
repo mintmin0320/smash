@@ -6,6 +6,7 @@ import { faPowerOff, faFolder, faUser } from "@fortawesome/free-solid-svg-icons"
 import { AnimationGroup } from '../util/animation';
 import Modal from '../util/modal';
 import axios from 'axios';
+import Router from "next/router";
 
 export default function HomePage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -18,26 +19,6 @@ export default function HomePage() {
   const closeModal = () => {
     setModalOpen(false);
   };
-
-  useEffect(() => {
-    const a = async () => {
-
-
-      const userInfo = localStorage.getItem('userInfo');
-      const url = `http://localhost:8080/user/`
-      const res = await axios.get(url, {
-        headers: {
-          'Authorization': userInfo
-        }
-      });
-      console.log(res);
-      console.log(res.headers);
-      if (!res.data.result) {
-        location.replace('/login');
-      }
-    }
-    a();
-  })
 
   return (
     <Container>
@@ -89,7 +70,9 @@ export default function HomePage() {
               <IconBox>
                 <FontAwesomeIcon icon={faPowerOff} size="3x" color="#D8D8D8" />
               </IconBox>
-              <NameBox>로그아웃</NameBox>
+              <NameBox>
+                로그아웃
+              </NameBox>
             </MainBox>
           </MidBox>
         </LeftBox>
