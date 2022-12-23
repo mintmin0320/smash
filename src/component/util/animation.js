@@ -1,6 +1,7 @@
 import Lottie from 'react-lottie-player'
-import errLottie from '../../public/animation404.json';
-import group from '../../public/group.json';
+import group from '../../../public/group.json';
+import errLottie from '../../../public/animation404.json';
+
 
 export function Animation() {
   return (

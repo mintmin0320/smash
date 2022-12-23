@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPowerOff, faFolder, faUser } from "@fortawesome/free-solid-svg-icons";
-import { AnimationGroup } from '../util/animation';
-import Modal from '../util/modal';
+import { AnimationGroup } from '../component/util/animation';
+import Modal from '../component/util/modal';
 import axios from 'axios';
 import Router from "next/router";
+import Title from '../component/util/title'
 
-export default function HomePage() {
+export default function Login() {
   const [modalOpen, setModalOpen] = useState(false);
   const [folderName, setefolderName] = useState("");
 
@@ -20,8 +21,10 @@ export default function HomePage() {
     setModalOpen(false);
   };
 
+
   return (
     <Container>
+      <Title title="Home" />
       <Modal open={modalOpen} close={closeModal} header={folderName} />
       <Content>
         <LeftBox>
@@ -93,6 +96,7 @@ export default function HomePage() {
     </Container>
   );
 }
+
 
 const Container = styled.div`
   width: 100%;
