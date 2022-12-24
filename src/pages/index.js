@@ -103,7 +103,7 @@ const Container = styled.div`
   height: 100vh;
   justify-content: center;
   /* align-items: center; */
-  background: #EFFBFB;
+  background-color: #F8EFFB;;
 `
 
 const Content = styled.div`
