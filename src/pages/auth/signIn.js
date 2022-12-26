@@ -139,7 +139,8 @@ export default function SignIn() {
     useEffect(() => {
       if (time.current >= 95) {
         setgauge(95);
-        clearInterval(timerId.current); router.push('/', undefined, { shallow: true })
+        clearInterval(timerId.current);
+        router.push('/', undefined, { shallow: true })
         console.log("timeout");
       }
     }, []);
@@ -236,6 +237,7 @@ export default function SignIn() {
     </Container>
   );
 };
+
 const Container = styled.div`
   width: 100%;
   height: 100vh;
