@@ -24,9 +24,14 @@
   <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=for-the-badge&logo=Visual Studio Code&logoColor=white"/>
   <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white"/>
 </div>
+<br />
 <div align="center">
+<b>auth page</b>
+
 ![github-img](https://user-images.githubusercontent.com/114549939/209489339-d0db023d-3985-4f67-94e8-7a9bc2ba50c9.png)
+
 </div>
+
 <br/>
 
 

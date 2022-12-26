@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPowerOff, faFolder, faUser } from "@fortawesome/free-solid-svg-icons";
-import { AnimationGroup } from '../component/util/animation';
-import Modal from '../component/util/modal';
+import { AnimationGroup } from '../component/util/Animation';
+import Modal from '../component/util/Modal';
 import axios from 'axios';
 import Router from "next/router";
-import Title from '../component/util/title'
+import Title from '../component/util/Title'
 
 export default function Login() {
   const [modalOpen, setModalOpen] = useState(false);

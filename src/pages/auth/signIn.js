@@ -2,11 +2,13 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router';
 import axios from 'axios'
 import styled from 'styled-components'
-import Title from '../../component/util/title'
+import Title from '../../component/util/Title'
+import { useAuthDispatch } from '../../context/auth';
 
 export default function SignIn() {
   let router = useRouter();
-  const time = useRef(0)
+  const dispatch = useAuthDispatch();
+  const time = useRef(0);
   const timerId = useRef(null);
   const inputFocus = useRef(null);
   const [gauge, setgauge] = useState(0);
@@ -111,6 +113,7 @@ export default function SignIn() {
           pwResult: true,
           pwValidation: true,
         });
+        dispatch('LOGIN');
       }
       else {
         setState({
@@ -136,8 +139,7 @@ export default function SignIn() {
     useEffect(() => {
       if (time.current >= 95) {
         setgauge(95);
-        clearInterval(timerId.current);
-        router.push('/', undefined, { shallow: true })
+        clearInterval(timerId.current); router.push('/', undefined, { shallow: true })
         console.log("timeout");
       }
     }, []);
@@ -278,7 +280,7 @@ const MenuButton = styled.button`
   width: 14px;
   height: 14px;
   display: flex;
-  border: solid 1px black;
+  border: solid 1px ${(props => (props.btnColor === "red" ? "#F78181" : props.btnColor === "orange" ? "#F7BE81" : "#01DF01"))};
   border-radius: 50%;
   background: ${(props => (props.btnColor === "red" ? "#F78181" : props.btnColor === "orange" ? "#F7BE81" : "#01DF01"))};
 `

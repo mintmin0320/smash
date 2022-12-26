@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Title from '../../component/util/title'
+import Title from '../../component/util/Title'
 import Image from 'next/image'
 import logo from '../../../public/logo.png'
 
@@ -94,7 +94,7 @@ const MenuButton = styled.button`
   width: 14px;
   height: 14px;
   display: flex;
-  border: solid 1px black;
+  border: solid 1px ${(props => (props.btnColor === "red" ? "#F78181" : props.btnColor === "orange" ? "#F7BE81" : "#01DF01"))};
   border-radius: 50%;
   background: ${(props => (props.btnColor === "red" ? "#F78181" : props.btnColor === "orange" ? "#F7BE81" : "#01DF01"))};
 `

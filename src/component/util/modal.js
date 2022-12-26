@@ -114,7 +114,7 @@ const MenuButton = styled.button`
   height: 14px;
   display: flex;
   cursor: pointer;
-  border: solid 1px #E6E6E6;
+  border: solid 1px ${(props => (props.btnColor === "red" ? "#F78181" : props.btnColor === "orange" ? "#F7BE81" : "#01DF01"))};;
   border-radius: 50%;
   background: ${(props => (props.btnColor === "red" ? "#F78181" : props.btnColor === "orange" ? "#F7BE81" : "#01DF01"))};
 `
