@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import Image from 'next/image'
 import Title from '../../component/util/Title'
 import MenuBar from '../../component/util/MenuBar'
-import logo from '../../../public/logo.png'
 
 export default function Home() {
   const now = new Date();
@@ -20,7 +19,7 @@ export default function Home() {
             Welcome to SMASH!!&nbsp;&nbsp;{nowDate}&nbsp;on console
           </HeaderShellBox>
           <LogoBox>
-            <Image src={logo} alt="error" />
+            <Image src={'/logo.png'} alt="error" width="800" height="250" />
           </LogoBox>
           <br />
           <QuarterBox>
@@ -64,6 +63,32 @@ const Wrap = styled.div`
   overflow: hidden;
   background: black;
   box-shadow: 10px 10px 15px rgb(0,0,0,0.5);
+`
+// 메뉴바
+const MenubarBox = styled.div`
+  width: 100%;
+  height: 8%;
+  display: flex;
+  border-bottom: solid 1px black;
+  border-radius: 13px 13px 0px 0px;
+  background: #585858;
+`
+
+const ButtonBox = styled.div`
+  width: 9%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`
+
+const MenuButton = styled.button`
+  width: 14px;
+  height: 14px;
+  display: flex;
+  border: solid 1px ${(props => (props.btnColor === "red" ? "#F78181" : props.btnColor === "orange" ? "#F7BE81" : "#01DF01"))};
+  border-radius: 50%;
+  background: ${(props => (props.btnColor === "red" ? "#F78181" : props.btnColor === "orange" ? "#F7BE81" : "#01DF01"))};
 `
 // 메인 컨텐츠
 const Content = styled.div`

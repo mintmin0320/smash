@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Mypage from '../mypage/mypage';
+import Community from '../community/Community';
 
 export default function Modal(props) {
   const { open, close, header } = props;
@@ -22,6 +23,11 @@ export default function Modal(props) {
               {header === "내정보" && (
                 <MypageBox>
                   <Mypage />
+                </MypageBox>
+              )}
+              {header === "커뮤니티" && (
+                <MypageBox>
+                  <Community />
                 </MypageBox>
               )}
             </Main>

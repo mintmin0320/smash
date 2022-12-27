@@ -30,13 +30,12 @@ export default function Login() {
         <LeftBox>
           <MidBox>
             <MainBox onClick={() => openModal("내정보")}>
-              <FolderGroup icon={faUser} title={"꿩"} />
-
+              <FolderGroup icon={faUser} title={"내정보"} />
             </MainBox>
           </MidBox>
           <MidBox>
-            <MainBox onClick={() => openModal("독수리")}>
-              <FolderGroup icon={faFolder} title={"독수리"} />
+            <MainBox onClick={() => openModal("커뮤니티")}>
+              <FolderGroup icon={faFolder} title={"커뮤니티"} />
             </MainBox>
           </MidBox>
           <MidBox>

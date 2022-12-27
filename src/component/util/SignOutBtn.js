@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-
+import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
-import axios from 'axios';
 
 const TopButton = () => {
-  const [ScrollY, setScrollY] = useState(0);
 
   const handleSignOut = () => {
     axios.post('/auth/signout')
@@ -19,37 +17,11 @@ const TopButton = () => {
       })
   };
 
-  const handleFollow = () => {
-    setScrollY(window.scrollY);
-  }
-
-  const handleTop = () => {  // 클릭하면 스크롤이 위로 올라가는 함수
-    console.log(ScrollY);
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-    setScrollY(0);  // ScrollY 의 값을 초기화
-  }
-
-  useEffect(() => {
-    const watch = () => {
-      window.addEventListener('scroll', handleFollow);
-    }
-    watch();
-    return () => {
-      window.removeEventListener('scroll', handleFollow);
-    }
-  })
-
   return (
     <Container>
       <button
         className="topBtn"
-        onClick={() => {
-          handleTop()
-          handleSignOut()
-        }}
+        onClick={handleSignOut}
       >
         <FontAwesomeIcon icon={faPowerOff} size="2x" />
       </button>
@@ -68,7 +40,6 @@ const Container = styled.div`
     border: 0 none;
     background: #848484;
     color: white;
-    // border: 2px solid #0064ff;
     font-size: 18px;
     font-weight: bold;
     letter-spacing: -0.06em;
