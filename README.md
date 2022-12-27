@@ -28,7 +28,7 @@
 <div align="center">
 <b>auth page</b>
 
-![github-img](https://user-images.githubusercontent.com/114549939/209489339-d0db023d-3985-4f67-94e8-7a9bc2ba50c9.png)
+![login](https://user-images.githubusercontent.com/114549939/209595519-986102b9-53ad-45b7-a0ee-896bd076e3c9.png)
 
 </div>
 
