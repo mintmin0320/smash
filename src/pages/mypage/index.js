@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
-import LoginPage from '../../component/auth/login';
-import Title from '../../component/util/title'
+import Title from '../../component/util/Title'
 
 export default function Mypage() {
   return (

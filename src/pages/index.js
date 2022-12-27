@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import { useState } from 'react';
+import { faUser, faFolder } from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPowerOff, faFolder, faUser } from "@fortawesome/free-solid-svg-icons";
-import { AnimationGroup } from '../component/util/Animation';
-import Modal from '../component/util/Modal';
-import axios from 'axios';
 import Router from "next/router";
+import axios from 'axios';
+import styled from 'styled-components';
+import Modal from '../component/util/Modal';
+import { AnimationGroup } from '../component/util/Lottie';
+import FolderGroup from '../component/util/FolderGroup';
 import Title from '../component/util/Title'
+import SignOutBtn from '../component/util/SignOutBtn'
 
 export default function Login() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -21,7 +22,6 @@ export default function Login() {
     setModalOpen(false);
   };
 
-
   return (
     <Container>
       <Title title="Home" />
@@ -30,52 +30,28 @@ export default function Login() {
         <LeftBox>
           <MidBox>
             <MainBox onClick={() => openModal("내정보")}>
-              <IconBox>
-                <FontAwesomeIcon icon={faUser} size="3x" color="#81BEF7" />
-              </IconBox>
-              <NameBox>마이페이지</NameBox>
+              <FolderGroup icon={faUser} title={"꿩"} />
+
             </MainBox>
           </MidBox>
           <MidBox>
             <MainBox onClick={() => openModal("독수리")}>
-              <IconBox>
-                <FontAwesomeIcon icon={faFolder} size="3x" color="#81BEF7" />
-              </IconBox>
-              <NameBox>독수리</NameBox>
+              <FolderGroup icon={faFolder} title={"독수리"} />
             </MainBox>
           </MidBox>
           <MidBox>
             <MainBox onClick={() => openModal("꿩")}>
-              <IconBox>
-                <FontAwesomeIcon icon={faFolder} size="3x" color="#81BEF7" />
-              </IconBox>
-              <NameBox>꿩</NameBox>
+              <FolderGroup icon={faFolder} title={"꿩"} />
             </MainBox>
           </MidBox>
           <MidBox>
             <MainBox onClick={() => openModal("닭")}>
-              <IconBox>
-                <FontAwesomeIcon icon={faFolder} size="3x" color="#81BEF7" />
-              </IconBox>
-              <NameBox>닭</NameBox>
+              <FolderGroup icon={faFolder} title={"닭"} />
             </MainBox>
           </MidBox>
           <MidBox>
             <MainBox onClick={() => openModal("따오기")}>
-              <IconBox>
-                <FontAwesomeIcon icon={faFolder} size="3x" color="#81BEF7" />
-              </IconBox>
-              <NameBox>따오기</NameBox>
-            </MainBox>
-          </MidBox>
-          <MidBox>
-            <MainBox>
-              <IconBox>
-                <FontAwesomeIcon icon={faPowerOff} size="3x" color="#D8D8D8" />
-              </IconBox>
-              <NameBox>
-                로그아웃
-              </NameBox>
+              <FolderGroup icon={faFolder} title={"따오기"} />
             </MainBox>
           </MidBox>
         </LeftBox>
@@ -87,12 +63,13 @@ export default function Login() {
             <BlankBox />
             <LogoBox>
               <LogoSize>
-                <AnimationGroup />
+
               </LogoSize>
             </LogoBox>
           </RightBottom>
         </RighttBox>
       </Content>
+      <SignOutBtn />
     </Container>
   );
 };
@@ -100,7 +77,6 @@ export default function Login() {
 export const getServerSideProps = async ({ req, res }) => {
   try {
     const cookie = req.headers.cookie;
-    // console.log()
     //쿠키가 없다면 에러를 보내기
     if (!cookie) throw new Error("Missing auth token cookie");
 
@@ -122,7 +98,6 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   justify-content: center;
-  /* align-items: center; */
   background-color: #F8EFFB;;
 `
 
@@ -149,7 +124,6 @@ const RightTop = styled.div`
   align-items: center;
   justify-content: center;
   justify-content: center;
-  /* border-bottom: solid 1px silver; */
 `
 
 const RightBottom = styled.div`
@@ -172,7 +146,6 @@ const LogoBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* border: solid 1px black; */
 `
 
 const LogoSize = styled.div`
@@ -188,7 +161,6 @@ const LeftBox = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* border-right: solid 1px lightgray; */
 `
 
 const MidBox = styled.div`
@@ -213,19 +185,4 @@ const MainBox = styled.div`
     width: 100%;
     height: 100%;
   }
-`
-
-const IconBox = styled.div`
-  width: 100%;
-  height: 70%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
-const NameBox = styled.div`
-  width: 100%;
-  height: 30%;
-  display: flex;
-  justify-content: center;
 `

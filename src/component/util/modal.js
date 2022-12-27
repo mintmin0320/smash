@@ -2,15 +2,13 @@ import styled from 'styled-components';
 import Mypage from '../mypage/mypage';
 
 export default function Modal(props) {
-  // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
-  const { open, close, header, ss } = props;
+  const { open, close, header } = props;
   return (
     <Container>
       <div className={open ? 'openModal modal' : 'modal'}>
         {open ? (
           <SectionBox>
             <MenubarBox>
-              {/* &nbsp;&nbsp; */}
               <ButtonBox>
                 <MenuButton btnColor={"red"} onClick={close} />
                 <MenuButton btnColor={"orange"} />

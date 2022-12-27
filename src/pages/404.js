@@ -1,4 +1,4 @@
-import { Animation } from '../component/util/animation'
+import { Animation } from '../component/util/Lottie'
 import styled from 'styled-components';
 
 export default function ErrorPage() {
