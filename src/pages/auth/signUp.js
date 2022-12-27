@@ -1,9 +1,11 @@
-import axios from 'axios'
-import styled from 'styled-components'
 import React, { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router';
-import Title from '../../component/util/Title'
+import axios from 'axios'
+import styled from 'styled-components'
 import Link from 'next/link';
+import Title from '../../component/util/Title'
+import MenuBar from '../../component/util/MenuBar'
+
 
 export default function SignUp() {
   let router = useRouter();
@@ -67,16 +69,9 @@ export default function SignUp() {
   return (
     <Container>
       <Title title="signUp" />
-      <LoginBox>
-        <MenubarBox>
-          &nbsp;&nbsp;
-          <ButtonBox>
-            <MenuButton btnColor={"red"} />
-            <MenuButton btnColor={"orange"} />
-            <MenuButton btnColor={"green"} />
-          </ButtonBox>
-        </MenubarBox>
-        <InputBox>
+      <Wrap>
+        <MenuBar />
+        <Content>
           <Form onSubmit={handleSubmit}>
             <ShellBox>
               <ShellTextBox textColor={"green"}>Please enter the information</ShellTextBox>&nbsp;&nbsp;
@@ -106,19 +101,19 @@ export default function SignUp() {
             <br />
             <br />
             <SignUpBox>
-              <QuarterButton>
-                <QuarterText>Sign Up</QuarterText>
-              </QuarterButton>
+              <SignUpButton>
+                <SignUpText>Sign Up</SignUpText>
+              </SignUpButton>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <Link href="/auth" legacyBehavior>
-                <QuarterButton>
-                  <QuarterText>Back</QuarterText>
-                </QuarterButton>
+                <SignUpButton>
+                  <SignUpText>Back</SignUpText>
+                </SignUpButton>
               </Link>
             </SignUpBox>
           </Form>
-        </InputBox>
-      </LoginBox>
+        </Content>
+      </Wrap>
     </Container>
   );
 };
@@ -132,7 +127,7 @@ const Container = styled.div`
   background-color: #F8EFFB;
 `
 
-const LoginBox = styled.div`
+const Wrap = styled.div`
   width: 50%;
   height: 65%;
   display: flex;
@@ -144,16 +139,7 @@ const LoginBox = styled.div`
   background: black;
   box-shadow: 10px 10px 15px rgb(0,0,0,0.5);
 `
-
-const MenubarBox = styled.div`
-  width: 100%;
-  height: 8%;
-  display: flex;
-  border-bottom: solid 1px black;
-  border-radius: 13px 13px 0px 0px;
-  background: #585858;
-`
-
+// Form
 const Form = styled.form`
   width: 98.5%;
   height: 100%;
@@ -161,24 +147,7 @@ const Form = styled.form`
   flex-direction: column;
 `
 
-const ButtonBox = styled.div`
-  width: 9%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-`
-
-const MenuButton = styled.button`
-  width: 14px;
-  height: 14px;
-  display: flex;
-  border: solid 1px ${(props => (props.btnColor === "red" ? "#F78181" : props.btnColor === "orange" ? "#F7BE81" : "#01DF01"))};
-  border-radius: 50%;
-  background: ${(props => (props.btnColor === "red" ? "#F78181" : props.btnColor === "orange" ? "#F7BE81" : "#01DF01"))};
-`
-
-const InputBox = styled.div`
+const Content = styled.div`
   width: 100%;
   height: 90%;
   display: flex;
@@ -198,10 +167,8 @@ const ShellBox = styled.div`
 
 const SignUpBox = styled.div`
   width: 98.5%;
-  /* height: 8%; */
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   font-size: 20px;
   color: white;
 `
@@ -223,13 +190,9 @@ const Input = styled.input`
   &:focus{
     outline: none;
   }
-
-  /* &::placeholder{
-    font-size: 18px;
-    color: #82FA58;
-  } */
 `
-const QuarterButton = styled.button`
+
+const SignUpButton = styled.button`
   width: 25%;
   height: 50px;
   background: black;
@@ -238,7 +201,7 @@ const QuarterButton = styled.button`
   cursor: pointer;
 `
 
-const QuarterText = styled.div`
+const SignUpText = styled.div`
   width: 100%;
   height: 100%;
   display: flex;

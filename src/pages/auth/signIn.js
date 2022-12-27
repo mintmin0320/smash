@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router';
+import { useAuthDispatch } from '../../context/auth';
 import axios from 'axios'
 import styled from 'styled-components'
 import Title from '../../component/util/Title'
-import { useAuthDispatch } from '../../context/auth';
+import MenuBar from '../../component/util/MenuBar'
 
 export default function SignIn() {
   let router = useRouter();
@@ -153,16 +154,9 @@ export default function SignIn() {
   return (
     <Container>
       <Title title="signIn" />
-      <LoginBox>
-        <MenubarBox>
-          &nbsp;&nbsp;
-          <ButtonBox>
-            <MenuButton btnColor={"red"} />
-            <MenuButton btnColor={"orange"} />
-            <MenuButton btnColor={"green"} />
-          </ButtonBox>
-        </MenubarBox>
-        <InputBox>
+      <Wrap>
+        <MenuBar />
+        <Content>
           <ShellBox>
             <ShellTextBox textColor={"green"}>login-checking id</ShellTextBox>&nbsp;&nbsp;
             <ShellTextBox textColor={"yellow"}>~/www/smash/com</ShellTextBox>&nbsp;&nbsp;
@@ -232,8 +226,8 @@ export default function SignIn() {
               </ShellBox>
             </React.Fragment>
           )}
-        </InputBox>
-      </LoginBox>
+        </Content>
+      </Wrap>
     </Container>
   );
 };
@@ -247,7 +241,7 @@ const Container = styled.div`
   background-color: #F8EFFB;
 `
 
-const LoginBox = styled.div`
+const Wrap = styled.div`
   width: 50%;
   height: 65%;
   display: flex;
@@ -260,34 +254,7 @@ const LoginBox = styled.div`
   box-shadow: 10px 10px 15px rgb(0,0,0,0.5);
 `
 
-const MenubarBox = styled.div`
-  width: 100%;
-  height: 8%;
-  display: flex;
-  border-bottom: solid 1px black;
-  border-radius: 13px 13px 0px 0px;
-  background: #585858;
-`
-
-const ButtonBox = styled.div`
-  width: 9%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  /* border-right: solid 1px black; */
-`
-
-const MenuButton = styled.button`
-  width: 14px;
-  height: 14px;
-  display: flex;
-  border: solid 1px ${(props => (props.btnColor === "red" ? "#F78181" : props.btnColor === "orange" ? "#F7BE81" : "#01DF01"))};
-  border-radius: 50%;
-  background: ${(props => (props.btnColor === "red" ? "#F78181" : props.btnColor === "orange" ? "#F7BE81" : "#01DF01"))};
-`
-
-const InputBox = styled.div`
+const Content = styled.div`
   width: 100%;
   height: 90%;
   display: flex;
@@ -298,9 +265,7 @@ const InputBox = styled.div`
 
 const ShellBox = styled.div`
   width: 98.5%;
-  /* height: 8%; */
   display: flex;
-  /* align-items: center; */
   font-size: 20px;
   color: white;
 `

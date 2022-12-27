@@ -1,8 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Title from '../../component/util/Title'
 import Image from 'next/image'
+import Title from '../../component/util/Title'
+import MenuBar from '../../component/util/MenuBar'
 import logo from '../../../public/logo.png'
 
 export default function Home() {
@@ -12,21 +13,14 @@ export default function Home() {
   return (
     <Container>
       <Title title="auth" />
-      <LoginBox>
-        <MenubarBox>
-          &nbsp;&nbsp;
-          <ButtonBox>
-            <MenuButton btnColor={"red"} />
-            <MenuButton btnColor={"orange"} />
-            <MenuButton btnColor={"green"} />
-          </ButtonBox>
-        </MenubarBox>
-        <InputBox>
+      <Wrap>
+        <MenuBar />
+        <Content>
           <HeaderShellBox>
             Welcome to SMASH!!&nbsp;&nbsp;{nowDate}&nbsp;on console
           </HeaderShellBox>
           <LogoBox>
-            <Image src={logo} />
+            <Image src={logo} alt="error" />
           </LogoBox>
           <br />
           <QuarterBox>
@@ -44,8 +38,8 @@ export default function Home() {
               <QuarterText>Utils</QuarterText>
             </QuarterButton>
           </QuarterBox>
-        </InputBox>
-      </LoginBox>
+        </Content>
+      </Wrap>
     </Container>
   );
 }
@@ -59,7 +53,7 @@ const Container = styled.div`
   background-color: #F8EFFB;
 `
 
-const LoginBox = styled.div`
+const Wrap = styled.div`
   width: 50%;
   height: 65%;
   display: flex;
@@ -71,35 +65,8 @@ const LoginBox = styled.div`
   background: black;
   box-shadow: 10px 10px 15px rgb(0,0,0,0.5);
 `
-
-const MenubarBox = styled.div`
-  width: 100%;
-  height: 8%;
-  display: flex;
-  border-bottom: solid 1px black;
-  border-radius: 13px 13px 0px 0px;
-  background: #585858;
-`
-
-const ButtonBox = styled.div`
-  width: 9%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  /* border-right: solid 1px black; */
-`
-
-const MenuButton = styled.button`
-  width: 14px;
-  height: 14px;
-  display: flex;
-  border: solid 1px ${(props => (props.btnColor === "red" ? "#F78181" : props.btnColor === "orange" ? "#F7BE81" : "#01DF01"))};
-  border-radius: 50%;
-  background: ${(props => (props.btnColor === "red" ? "#F78181" : props.btnColor === "orange" ? "#F7BE81" : "#01DF01"))};
-`
-
-const InputBox = styled.div`
+// 메인 컨텐츠
+const Content = styled.div`
   width: 100%;
   height: 90%;
   display: flex;
@@ -112,11 +79,10 @@ const HeaderShellBox = styled.div`
   width: 98.5%;
   height: 10%;
   display: flex;
-  /* align-items: center; */
   font-size: 20px;
   color: white;
 `
-
+// 로고
 const LogoBox = styled.div`
   width: 80%;
   display: flex;
@@ -124,7 +90,7 @@ const LogoBox = styled.div`
   font-size: 18px;
   color: white;
 `
-
+// 버튼 분기
 const QuarterBox = styled.div`
   width: 100%;
   height: 30%;
@@ -135,8 +101,8 @@ const QuarterBox = styled.div`
 `
 
 const QuarterButton = styled.div`
-  width: 40%;
-  height: 30%;
+  width: 55%;
+  height: 45%;
   background: black;
   color: white; 
   border: dashed 1px #82FA58;
@@ -149,6 +115,6 @@ const QuarterText = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 13px;
+  font-size: 17px;
   color: #82FA58;
 `
