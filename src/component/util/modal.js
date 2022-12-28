@@ -113,7 +113,7 @@ const NameBox = styled.div`
   align-items: center;
 `
 
-const MenuButton = styled.button`
+const MenuButton = styled.div`
   width: 14px;
   height: 14px;
   display: flex;
@@ -123,25 +123,21 @@ const MenuButton = styled.button`
   background: ${(props => (props.btnColor === "red" ? "#F78181" : props.btnColor === "orange" ? "#F7BE81" : "#01DF01"))};
 `
 
-const Main = styled.button`
+const Main = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  background: white;
+  background: #F2F2F2;
   border: solid 0;
 `
 
 const MypageBox = styled.button`
   width: 80%;
-  height: 100%;
+  height: 90%;
   display: flex;
   justify-content: center;
-  align-items: center;
   background: white;
-  border-left: solid 3px #F5F5F5;
-  border-right: solid 3px #F5F5F5;
-  border-top: solid 0;
+  border: solid 0;
   padding: 0;
 `

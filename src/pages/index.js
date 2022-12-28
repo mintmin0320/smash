@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { faUser, faFolder } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faFolder, faComments } from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
 import Router from "next/router";
 import axios from 'axios';
@@ -35,7 +35,7 @@ export default function Login() {
           </MidBox>
           <MidBox>
             <MainBox onClick={() => openModal("커뮤니티")}>
-              <FolderGroup icon={faFolder} title={"커뮤니티"} />
+              <FolderGroup icon={faComments} title={"커뮤니티"} />
             </MainBox>
           </MidBox>
           <MidBox>

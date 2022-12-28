@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationArrow, faUser, faPencil } from "@fortawesome/free-solid-svg-icons";
+import { faLocationArrow, faUser, faPencil, faRotateRight } from "@fortawesome/free-solid-svg-icons";
+import WritePost from './WritePost';
 
 export default function Community() {
   const [state, setState] = useState({
     search: '',
+    write: false,
+    postList: [],
   });
+
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
 
   const handleInputChange = (e) => {
     setState({
@@ -14,6 +23,54 @@ export default function Community() {
       [e.target.name]: e.target.value
     });
   };
+
+  const getPostList = async () => {
+    const url = `/post/list`
+    const res = await axios.get(url);
+    try {
+      setState({
+        ...state,
+        postList: res.data.postList,
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getPostList();
+  }, []);
+
+  const handleRefreshButton = () => {
+    getPostList();
+  };
+
+  const handleWriteButton = () => {
+    setState({
+      ...state,
+      write: true,
+    })
+  };
+
+  const PostList = () => {
+    return (
+      <BottomBox>
+        {
+          state.postList.map((item, idx) => {
+            return (
+              <PostBox key={idx}>
+                <PostWriter>{item.author.userId}</PostWriter>
+                <PostTitle>{item.title}</PostTitle>
+                <PostContent>{item.body}</PostContent>
+                <PostDate>{year}-{month}-{day}</PostDate>
+              </PostBox>
+            )
+          })
+        }
+      </BottomBox>
+    )
+  }
 
   return (
     <Container>
@@ -24,9 +81,6 @@ export default function Community() {
               <FontAwesomeIcon icon={faUser} size="2x" />
             </Profil>
           </ProfilImg>
-          <ProfilText>
-            hamin
-          </ProfilText>
         </ProfilBox>
         <SearchBox>
           <Input
@@ -40,76 +94,21 @@ export default function Community() {
           />
         </SearchBox>
         <ButtonBox search={"search"}>
-          <FontAwesomeIcon icon={faLocationArrow} size="3x" />
+          <FontAwesomeIcon icon={faLocationArrow} size="2x" />
         </ButtonBox>
-        <ButtonBox>
-          <FontAwesomeIcon icon={faPencil} size="3x" />
+        <ButtonBox onClick={handleWriteButton}>
+          <FontAwesomeIcon icon={faPencil} size="2x" />
+        </ButtonBox>
+        <ButtonBox onClick={handleRefreshButton}>
+          <FontAwesomeIcon icon={faRotateRight} size="2x" />
         </ButtonBox>
       </TopBox>
-      <BottomBox>
-        <PostBox>
-          <PostWriter>hamin</PostWriter>
-          <PostTitle>nextjs 어렵다</PostTitle>
-          <PostContent>넥스트제이에스는영국에서부터시작한..편지로 이편지를 받은</PostContent>
-          <PostDate>2022-12-27</PostDate>
-        </PostBox>
-        <PostBox>
-          <PostWriter>hamin</PostWriter>
-          <PostTitle>node는 쉽다</PostTitle>
-          <PostContent>곧 퇴근시간인데 노드 정리한 것 보면서 쉬세요</PostContent>
-          <PostDate>2022-12-27</PostDate>
-        </PostBox>
-        <PostBox>
-          <PostWriter>hamin</PostWriter>
-          <PostTitle>node는 쉽다</PostTitle>
-          <PostContent>곧 퇴근시간인데 노드 정리한 것 보면서 쉬세요</PostContent>
-          <PostDate>2022-12-27</PostDate>
-        </PostBox>
-        <PostBox>
-          <PostWriter>hamin</PostWriter>
-          <PostTitle>node는 쉽다</PostTitle>
-          <PostContent>곧 퇴근시간인데 노드 정리한 것 보면서 쉬세요</PostContent>
-          <PostDate>2022-12-27</PostDate>
-        </PostBox>
-        <PostBox>
-          <PostWriter>hamin</PostWriter>
-          <PostTitle>node는 쉽다</PostTitle>
-          <PostContent>곧 퇴근시간인데 노드 정리한 것 보면서 쉬세요</PostContent>
-          <PostDate>2022-12-27</PostDate>
-        </PostBox>
-        <PostBox>
-          <PostWriter>hamin</PostWriter>
-          <PostTitle>node는 쉽다</PostTitle>
-          <PostContent>곧 퇴근시간인데 노드 정리한 것 보면서 쉬세요</PostContent>
-          <PostDate>2022-12-27</PostDate>
-        </PostBox>
-        <PostBox>
-          <PostWriter>hamin</PostWriter>
-          <PostTitle>node는 쉽다</PostTitle>
-          <PostContent>곧 퇴근시간인데 노드 정리한 것 보면서 쉬세요</PostContent>
-          <PostDate>2022-12-27</PostDate>
-        </PostBox>
-        <PostBox>
-          <PostWriter>hamin</PostWriter>
-          <PostTitle>node는 쉽다</PostTitle>
-          <PostContent>곧 퇴근시간인데 노드 정리한 것 보면서 쉬세요</PostContent>
-          <PostDate>2022-12-27</PostDate>
-        </PostBox>
-        <PostBox>
-          <PostWriter>hamin</PostWriter>
-          <PostTitle>node는 쉽다</PostTitle>
-          <PostContent>곧 퇴근시간인데 노드 정리한 것 보면서 쉬세요</PostContent>
-          <PostDate>2022-12-27</PostDate>
-        </PostBox>
-        <PostBox>
-          <PostWriter>hamin</PostWriter>
-          <PostTitle>node는 쉽다</PostTitle>
-          <PostContent>곧 퇴근시간인데 노드 정리한 것 보면서 쉬세요</PostContent>
-          <PostDate>2022-12-27</PostDate>
-        </PostBox>
+      {!state.write ?
+        <PostList />
+        :
+        <WritePost />
+      }
 
-
-      </BottomBox>
     </Container>
   );
 };
@@ -123,10 +122,9 @@ const Container = styled.div`
 // 검색
 const TopBox = styled.div`
   width: 100%;
-  height: 10%;
+  height: 7%;
   display: flex;
   border-bottom: solid 3px #F2F2F2;
-  
 `
 // 검색 - 프로필
 const ProfilBox = styled.div`
@@ -136,7 +134,7 @@ const ProfilBox = styled.div`
 `
 
 const ProfilImg = styled.div`
-  width: 40%;
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -144,26 +142,18 @@ const ProfilImg = styled.div`
 `
 
 const Profil = styled.div`
-  width: 80%;
-  height: 65%;
+  width: 30%;
+  height: 75%;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: #FAFAFA;
-  border: solid 1px lightgrey;
-`
-
-const ProfilText = styled.div`
-  width: 60%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  font-size: 16px;
+  background-color: #F5F5F5;
+  /* border: solid 1px lightgrey; */
 `
 
 const SearchBox = styled.div`
-  width: 65%;
+  width: 70%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -172,7 +162,7 @@ const SearchBox = styled.div`
 
 // 검색창
 const Input = styled.input`
-  font-size: 24px;
+  font-size: 22px;
   border: none;
   width: 98%;
   height: 100%;
@@ -183,26 +173,26 @@ const Input = styled.input`
 `
 // 검색, 글쓰기 버튼
 const ButtonBox = styled.div`
-  width: 10%;
+  width: 5%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  cursor: pointer;;
   border-right: ${(props => (props.search === "search" ? "solid" : "none"))} 3px #F2F2F2;
 `
 
 const BottomBox = styled.div`
   width: 100%;
-  height: 85%;
+  height: 93%;
   overflow-y: scroll;
   display: grid;
   grid-template-columns: 1fr;
-  grid-row-gap: 100px;
+  grid-row-gap: 65px;
   align-items: center;
   place-items: center;
   /* overflow: hidden;  */
-  padding-top: 30px;
+  padding-top: 20px;
 `
 // 게시물
 const PostBox = styled.div`
@@ -229,6 +219,7 @@ const PostTitle = styled.div`
   align-items: center;
   color: #086A87;
   font-size: 30px;
+  font-weight: bold;
 `
 // 글내용(미리보기)
 const PostContent = styled.div`
