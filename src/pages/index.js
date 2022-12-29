@@ -10,7 +10,7 @@ import FolderGroup from '../component/util/FolderGroup';
 import Title from '../component/util/Title'
 import SignOutBtn from '../component/util/SignOutBtn'
 
-export default function Login() {
+export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const [folderName, setefolderName] = useState("");
 

@@ -3,12 +3,15 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow, faUser, faPencil, faRotateRight } from "@fortawesome/free-solid-svg-icons";
-import WritePost from './WritePost';
+import WritePost from './Write';
+import Post from './Post';
 
 export default function Community() {
   const [state, setState] = useState({
     search: '',
     write: false,
+    post: false,
+    postId: '',
     postList: [],
   });
 
@@ -27,12 +30,12 @@ export default function Community() {
   const getPostList = async () => {
     const url = `/post/list`
     const res = await axios.get(url);
+    console.log(res);
     try {
       setState({
         ...state,
         postList: res.data.postList,
       });
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -43,14 +46,27 @@ export default function Community() {
   }, []);
 
   const handleRefreshButton = () => {
-    getPostList();
+    setState({
+      ...state,
+      write: false,
+      post: false,
+    })
   };
 
   const handleWriteButton = () => {
     setState({
       ...state,
       write: true,
-    })
+    });
+  };
+
+  const handleViewPost = async (id) => {
+    console.log(id);
+    setState({
+      ...state,
+      postId: id,
+      post: true
+    });
   };
 
   const PostList = () => {
@@ -59,7 +75,7 @@ export default function Community() {
         {
           state.postList.map((item, idx) => {
             return (
-              <PostBox key={idx}>
+              <PostBox key={idx} onClick={() => handleViewPost(item._id)}>
                 <PostWriter>{item.author.userId}</PostWriter>
                 <PostTitle>{item.title}</PostTitle>
                 <PostContent>{item.body}</PostContent>
@@ -103,12 +119,14 @@ export default function Community() {
           <FontAwesomeIcon icon={faRotateRight} size="2x" />
         </ButtonBox>
       </TopBox>
-      {!state.write ?
-        <PostList />
-        :
+      {state.write ?
         <WritePost />
+        :
+        state.post ?
+          <Post postId={state.postId} />
+          :
+          <PostList />
       }
-
     </Container>
   );
 };

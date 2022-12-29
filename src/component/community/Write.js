@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 
 export default function WritePost() {
   const [state, setState] = useState({
     postTitle: '',
     postBody: '',
+    userId: '',
   });
 
   const handleInputChange = (e) => {
@@ -14,13 +16,34 @@ export default function WritePost() {
     });
   };
 
+  const handleWritePost = async () => {
+    const url = `/post/write`;
+    const params = {
+      postTitle: state.postTitle,
+      postBody: state.postBody,
+      userId: 'hamin'
+    };
+    const res = await axios.post(url, params);
+    console.log(res);
+    try {
+      console.log("게시글 작성 성공!");
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleBackButton = (e) => {
+    window.location.reload();
+  };
+
   return (
     <Container>
       <TopBox>
         <Input
           type="text"
           value={state.postTitle}
-          name="search"
+          name="postTitle"
           onChange={handleInputChange}
           maxLength={10}
         />
@@ -29,15 +52,14 @@ export default function WritePost() {
         <Textarea
           type="text"
           value={state.postBody}
-          name="search"
+          name="postBody"
           onChange={handleInputChange}
           maxLength={800}
         />
       </BottomBox>
       <ButtonBox>
-        <WriteButton>write</WriteButton>
-        <WriteButton>back</WriteButton>
-
+        <WriteButton onClick={handleWritePost}>write</WriteButton>
+        <WriteButton onClick={handleBackButton}>back</WriteButton>
       </ButtonBox>
     </Container>
   );
@@ -124,4 +146,5 @@ const WriteButton = styled.button`
   justify-content: center;
   font-size: 18px;
   font-weight: bold;
+  cursor: pointer;
 `
