@@ -34,9 +34,11 @@ export default function Home() {
             </MainBox>
           </MidBox>
           <MidBox>
-            <MainBox onClick={() => openModal("커뮤니티")}>
-              <FolderGroup icon={faComments} title={"커뮤니티"} />
-            </MainBox>
+            <Link href="/community" legacyBehavior>
+              <MainBox>
+                <FolderGroup icon={faComments} title={"커뮤니티"} />
+              </MainBox>
+            </Link>
           </MidBox>
           <MidBox>
             <MainBox onClick={() => openModal("꿩")}>

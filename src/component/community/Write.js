@@ -33,7 +33,7 @@ export default function WritePost() {
     }
   };
 
-  const handleBackButton = (e) => {
+  const handleBackButton = () => {
     window.location.reload();
   };
 
@@ -45,7 +45,7 @@ export default function WritePost() {
           value={state.postTitle}
           name="postTitle"
           onChange={handleInputChange}
-          maxLength={10}
+          maxLength={100}
         />
       </TopBox>
       <BottomBox>

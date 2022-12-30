@@ -7,7 +7,15 @@ export default function Post(props) {
     title: '',
     body: '',
     userId: '',
+    comment: '',
   });
+
+  const handleInputChange = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const getPostData = async () => {
     console.log(props.postId);
@@ -33,6 +41,10 @@ export default function Post(props) {
     }
   };
 
+  const handleBackButton = () => {
+    window.location.reload();
+  };
+
   useEffect(() => {
     getPostData();
   }, []);
@@ -40,13 +52,56 @@ export default function Post(props) {
   return (
     <Container>
       <TopBox>
-        {state.title}{state.body}{state.userId}
+        {state.title}
       </TopBox>
       <BottomBox>
+        <Content>
+          <AuthorBox>
+            작성자 : {state.userId}
+          </AuthorBox>
+          <BodyBox>
+            {state.body}
+          </BodyBox>
+          <MenuBox>
+            <ListButton onClick={handleBackButton}>
+              목록
+            </ListButton>
+            <ListButton>
+              삭제
+            </ListButton>
+          </MenuBox>
+        </Content>
+        <CommentBox>
+          <TextareaBox>
+            <Textarea
+              type="text"
+              value={state.comment}
+              name="comment"
+              onChange={handleInputChange}
+              maxLength={500}
+            />
+            <WriteButton>
+              확인
+            </WriteButton>
+          </TextareaBox>
+          <Comment>
+            <CommentId>
+              hamin
+            </CommentId>
+            <CommentBody>
+              오늘 단축근무..??
+            </CommentBody>
+          </Comment>
+          <Comment>
+            <CommentId>
+              hamin
+            </CommentId>
+            <CommentBody>
+              오늘 단축근무..??2
+            </CommentBody>
+          </Comment>
+        </CommentBox>
       </BottomBox>
-      <ButtonBox>
-
-      </ButtonBox>
     </Container>
   );
 };
@@ -56,19 +111,21 @@ const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  overflow-y: scroll;
 `
 
 const TopBox = styled.div`
-  width: 85%;
-  height: 15%;
+  width: 95%;
+  height: 10%;
+  border-bottom: solid 3px #F2F2F2;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-`
+  font-size: 20px;
+  font-weight: bolder;
+  `
 // 검색창
 const Input = styled.input`
   font-size: 22px;
@@ -79,29 +136,95 @@ const Input = styled.input`
   border-radius: 10px 10px 10px 10px;
   padding-right: 10px;
   padding-left: 10px;
-
+  
   &:focus{
     outline: none;
   }
-`
+  `
 
 const BottomBox = styled.div`
-  width: 85%;
-  height: 50%;
+  width: 95%;
+  height: 90%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+`
+
+const Content = styled.div`
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const AuthorBox = styled.div`
+  width: 95%;
+  height: 8%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 18px;
+`
+
+const BodyBox = styled.div`
+  width: 100%;
+  height: 77%;
+  display: flex;
+  font-size: 18px;
+`
+
+const MenuBox = styled.div`
+  width: 30%;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 18px;
+  `
+
+const ListButton = styled.div`
+  width: 30%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px 10px 10px 10px;
+  font-size: 18px;
+  background-color: #F2F2F2;
+  cursor: pointer;
+`
+
+const CommentBox = styled.div`
+  width: 100%;
+  height: 10%;
+`
+
+const TextareaBox = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
 `
 
+const WriteButton = styled.div`
+  width: 5%;
+  height: 95%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 10px 10px 0;
+  background-color: #F2F2F2;
+`
 // 검색창
 const Textarea = styled.textarea`
   font-size: 22px;
   border: none;
   width: 95%;
-  height: 95%;
+  height: 100%;
   border: solid 2px #E6E6E6;
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 0 0 10px;
   display: flex;
   padding-right: 10px;
   padding-top: 10px;
@@ -113,24 +236,26 @@ const Textarea = styled.textarea`
   }
 `
 
-const ButtonBox = styled.div`
-  width: 85%;
-  height: 20%;
+const Comment = styled.div`
+  width: 100%;
+  height: 80px;
   display: flex;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  border-bottom: solid 2px #F2F2F2;
 `
 
-const WriteButton = styled.button`
-  width: 15%;
-  height: 40%;
-  border: solid 1px #D8D8D8;
-  border-radius: 10px 10px 10px 10px;
+const CommentId = styled.div`
+  width: 25%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
+  border-bottom: solid 2px #F2F2F2;
+`
+
+const CommentBody = styled.div`
+  width: 75%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: solid 2px #F2F2F2;
 `
