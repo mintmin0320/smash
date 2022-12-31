@@ -35,6 +35,26 @@ export default function Community() {
       setState({
         ...state,
         postList: res.data.postList,
+        write: false,
+        post: false,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSearchButton = () => {
+    getSearchPost();
+  }
+
+  const getSearchPost = async () => {
+    const url = `/post/${state.search}`
+    const res = await axios.get(url);
+    console.log(res);
+    try {
+      setState({
+        ...state,
+        postList: res.data.postList,
       });
     } catch (error) {
       console.log(error);
@@ -46,11 +66,7 @@ export default function Community() {
   }, []);
 
   const handleRefreshButton = () => {
-    setState({
-      ...state,
-      write: false,
-      post: false,
-    })
+    getPostList();
   };
 
   const handleWriteButton = () => {
@@ -104,12 +120,12 @@ export default function Community() {
             value={state.search}
             name="search"
             onChange={handleInputChange}
-            maxLength={10}
+            maxLength={15}
             placeholder="Please enter your search term"
           // onKeyPress={(e) => { handleEnterPress("pw", e) }}
           />
         </SearchBox>
-        <ButtonBox search={"search"}>
+        <ButtonBox search={"search"} onClick={handleSearchButton}>
           <FontAwesomeIcon icon={faLocationArrow} size="2x" />
         </ButtonBox>
         <ButtonBox onClick={handleWriteButton}>
