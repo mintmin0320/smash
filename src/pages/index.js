@@ -58,13 +58,12 @@ export default function Home() {
         </LeftBox>
         <RighttBox>
           <RightTop>
-            여긴 달력을 두자
+
           </RightTop>
           <RightBottom>
             <BlankBox />
             <LogoBox>
               <LogoSize>
-
               </LogoSize>
             </LogoBox>
           </RightBottom>
@@ -124,7 +123,7 @@ const RightTop = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  justify-content: center;
+  border-bottom: solid 1px black;
 `
 
 const RightBottom = styled.div`
