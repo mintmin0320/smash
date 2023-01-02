@@ -2,18 +2,20 @@
 import { createContext, useContext, useReducer } from 'react'
 
 const StateContext = createContext({
+  user: '',
   authenticated: false,
   loading: true
 });
 
 const DispatchContext = createContext(null);
 
-const reducer = (state, { type }) => {
+const reducer = (state, { type, payload }) => {
+  console.log(type, payload);
   switch (type) {
     case 'LOGIN':
       return {
         ...state,
-        authenticated: true,
+        user: payload,
       }
     case 'LOGOUT':
       return {
@@ -32,15 +34,15 @@ const reducer = (state, { type }) => {
 
 export const AuthProvider = ({ children }) => {
   const [state, defaultDispatch] = useReducer(reducer, {
-    user: null,
+    user: '',
     authenticated: false,
     loading: true
   });
 
   console.log('state', state);
 
-  const dispatch = (type) => {
-    defaultDispatch({ type })
+  const dispatch = (type, payload) => {
+    defaultDispatch({ type, payload })
   }
 
   return (

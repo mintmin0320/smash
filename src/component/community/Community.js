@@ -15,11 +15,6 @@ export default function Community() {
     postList: [],
   });
 
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-
   const handleInputChange = (e) => {
     setState({
       ...state,
@@ -44,7 +39,11 @@ export default function Community() {
   };
 
   const handleSearchButton = () => {
-    getSearchPost();
+    if (state.search === '') {
+      alert("Please enter your search term !!");
+    } else {
+      getSearchPost();
+    }
   }
 
   const getSearchPost = async () => {
@@ -95,7 +94,7 @@ export default function Community() {
                 <PostWriter>{item.author.userId}</PostWriter>
                 <PostTitle>{item.title}</PostTitle>
                 <PostContent>{item.body}</PostContent>
-                <PostDate>{year}-{month}-{day}</PostDate>
+                <PostDate>{item.date}</PostDate>
               </PostBox>
             )
           })

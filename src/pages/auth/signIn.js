@@ -114,7 +114,7 @@ export default function SignIn() {
           pwResult: true,
           pwValidation: true,
         });
-        dispatch('LOGIN');
+        dispatch('LOGIN', res.data?.user.userId);
       }
       else {
         setState({

@@ -57,10 +57,10 @@ export default function WritePost() {
           maxLength={800}
         />
       </BottomBox>
-      <ButtonBox>
+      <WriteButtonBox>
         <WriteButton onClick={handleWritePost}>write</WriteButton>
         <WriteButton onClick={handleBackButton}>back</WriteButton>
-      </ButtonBox>
+      </WriteButtonBox>
     </Container>
   );
 };
@@ -127,7 +127,7 @@ const Textarea = styled.textarea`
   }
 `
 
-const ButtonBox = styled.div`
+const WriteButtonBox = styled.div`
   width: 85%;
   height: 20%;
   display: flex;

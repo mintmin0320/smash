@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -8,6 +8,7 @@ export default function Post(props) {
     body: '',
     userId: '',
     comment: '',
+    date: '',
   });
 
   const handleInputChange = (e) => {
@@ -18,7 +19,6 @@ export default function Post(props) {
   };
 
   const getPostData = async () => {
-    console.log(props.postId);
     const url = `/post/detail/${props.postId}`
     const res = await axios.get(url);
     console.log(res);
@@ -29,6 +29,7 @@ export default function Post(props) {
           title: res.data.result.title,
           body: res.data.result.body,
           userId: res.data.result.author.userId,
+          date: res.data.result.date,
         });
         console.log("게시물 조회 성공");
       }
@@ -57,7 +58,7 @@ export default function Post(props) {
       <BottomBox>
         <Content>
           <AuthorBox>
-            작성자 : {state.userId}
+            작성자 : {state.userId}&nbsp;&nbsp;&nbsp;{state.date}
           </AuthorBox>
           <BodyBox>
             {state.body}
@@ -160,11 +161,12 @@ const Content = styled.div`
 
 const AuthorBox = styled.div`
   width: 95%;
+  justify-content: flex-end;
   height: 8%;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  font-size: 18px;
+  font-size: 14px;
+  color: #848484
 `
 
 const BodyBox = styled.div`

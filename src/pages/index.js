@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { faUser, faFolder, faComments } from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
 import Router from "next/router";
@@ -83,6 +83,7 @@ export const getServerSideProps = async ({ req, res }) => {
     // 그 쿠키를 이용해서 백엔드에서 인증 처리하기
     const res = await axios.get("/auth/signStatus", { headers: { cookie } })
     console.log(res.data);
+
     console.log("로그인상태");
 
     return { props: {} }
