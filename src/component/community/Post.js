@@ -1,14 +1,17 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useAuthState } from '../../context/auth'
 
 export default function Post(props) {
+  const { user } = useAuthState();
   const [state, setState] = useState({
     title: '',
     body: '',
     userId: '',
     comment: '',
     date: '',
+    cmtList: [],
   });
 
   const handleInputChange = (e) => {
@@ -42,13 +45,87 @@ export default function Post(props) {
     }
   };
 
+  const getCmtData = async () => {
+    const url = `/comment/list`;
+    const params = {
+      postId: props.postId
+    };
+    const res = await axios.get(url, params);
+    console.log(res);
+    try {
+      if (res.status === 200) {
+        if (res.data.cmtList === null) {
+          setState({
+            ...state,
+            cmtList: [],
+          });
+          console.log("댓글이 존재하지 않습니다.");
+        }
+        else {
+          setState({
+            ...state,
+            cmtList: res.data.cmtList,
+          });
+          console.log("댓글 조회 성공");
+        }
+      }
+      else {
+        console.log("댓글 조회 실패");
+        history.back();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleWriteCmt = async () => {
+    const url = `/comment/write`
+    const params = {
+      cmtBody: state.comment,
+      postId: props.postId,
+      userId: "hamin"
+    }
+    const res = await axios.post(url, params);
+    console.log(res);
+    try {
+      if (res.status === 200) {
+        console.log("댓글 작성 성공");
+      }
+      else {
+        console.log("댓글 작성 실패");
+        history.back();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const handleBackButton = () => {
     window.location.reload();
   };
 
   useEffect(() => {
     getPostData();
+    getCmtData();
   }, []);
+
+
+  const CmtList = () => {
+    return (
+      <React.Fragment>
+        {
+          state.cmtList.map((item, idx) => {
+            return (
+              <Comment key={idx}>
+                <CommentId>{item.author.userId}</CommentId>
+                <CommentBody>{item.body}</CommentBody>
+              </Comment>
+            )
+          })
+        };
+      </React.Fragment>
+    );
+  };
 
   return (
     <Container>
@@ -67,9 +144,11 @@ export default function Post(props) {
             <ListButton onClick={handleBackButton}>
               목록
             </ListButton>
-            <ListButton>
-              삭제
-            </ListButton>
+            {state.userId === user && (
+              <ListButton>
+                삭제
+              </ListButton>
+            )}
           </MenuBox>
         </Content>
         <CommentBox>
@@ -79,28 +158,17 @@ export default function Post(props) {
               value={state.comment}
               name="comment"
               onChange={handleInputChange}
-              maxLength={500}
+              maxLength={100}
             />
-            <WriteButton>
+            <WriteButton onClick={handleWriteCmt}>
               확인
             </WriteButton>
           </TextareaBox>
-          <Comment>
-            <CommentId>
-              hamin
-            </CommentId>
-            <CommentBody>
-              오늘 단축근무..??
-            </CommentBody>
-          </Comment>
-          <Comment>
-            <CommentId>
-              hamin
-            </CommentId>
-            <CommentBody>
-              오늘 단축근무..??2
-            </CommentBody>
-          </Comment>
+          {state.cmtList === '' ?
+            ''
+            :
+            <CmtList />
+          }
         </CommentBox>
       </BottomBox>
     </Container>
@@ -218,6 +286,7 @@ const WriteButton = styled.div`
   justify-content: center;
   border-radius: 0 10px 10px 0;
   background-color: #F2F2F2;
+  cursor: pointer;
 `
 // 검색창
 const Textarea = styled.textarea`
