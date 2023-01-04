@@ -106,8 +106,8 @@ export default function Post(props) {
 
   useEffect(() => {
     getPostData();
-    getCmtData();
   }, []);
+
 
 
   const CmtList = () => {
@@ -164,11 +164,7 @@ export default function Post(props) {
               확인
             </WriteButton>
           </TextareaBox>
-          {state.cmtList === '' ?
-            ''
-            :
-            <CmtList />
-          }
+          <CmtList />
         </CommentBox>
       </BottomBox>
     </Container>
