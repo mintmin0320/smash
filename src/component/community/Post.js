@@ -21,6 +21,11 @@ export default function Post(props) {
     });
   };
 
+  useEffect(() => {
+    getPostData();
+    getCmtData();
+  }, []);
+
   const getPostData = async () => {
     const url = `/post/detail/${props.postId}`
     const res = await axios.get(url);
@@ -46,11 +51,9 @@ export default function Post(props) {
   };
 
   const getCmtData = async () => {
-    const url = `/comment/list`;
-    const params = {
-      postId: props.postId
-    };
-    const res = await axios.get(url, params);
+    console.log("postId :" + props.postId);
+    const url = `/comment/list/${props.postId}`;
+    const res = await axios.get(url);
     console.log(res);
     try {
       if (res.status === 200) {
@@ -58,6 +61,7 @@ export default function Post(props) {
           setState({
             ...state,
             cmtList: [],
+            comment: '',
           });
           console.log("댓글이 존재하지 않습니다.");
         }
@@ -65,6 +69,7 @@ export default function Post(props) {
           setState({
             ...state,
             cmtList: res.data.cmtList,
+            comment: '',
           });
           console.log("댓글 조회 성공");
         }
@@ -90,11 +95,16 @@ export default function Post(props) {
     try {
       if (res.status === 200) {
         console.log("댓글 작성 성공");
+        getCmtData();
       }
       else {
         console.log("댓글 작성 실패");
         history.back();
       }
+      setState({
+        ...state,
+        comment: '',
+      });
     } catch (error) {
       console.log(error);
     }
@@ -104,12 +114,6 @@ export default function Post(props) {
     window.location.reload();
   };
 
-  useEffect(() => {
-    getPostData();
-  }, []);
-
-
-
   const CmtList = () => {
     return (
       <React.Fragment>
@@ -117,8 +121,9 @@ export default function Post(props) {
           state.cmtList.map((item, idx) => {
             return (
               <Comment key={idx}>
-                <CommentId>{item.author.userId}</CommentId>
+                <CommentId>{item.userId}</CommentId>
                 <CommentBody>{item.body}</CommentBody>
+                <CommentDate>{item.date}</CommentDate>
               </Comment>
             )
           })
@@ -320,9 +325,17 @@ const CommentId = styled.div`
 `
 
 const CommentBody = styled.div`
-  width: 75%;
+  width: 60%;
   height: 100%;
   display: flex;
   align-items: center;
-  border-bottom: solid 2px #F2F2F2;
+`
+
+const CommentDate = styled.div`
+  width: 15%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
 `
