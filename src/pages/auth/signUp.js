@@ -102,7 +102,7 @@ export default function SignUp() {
             <br />
             <SignUpBox>
               <SignUpButton>
-                <SignUText>Sign Up</SignUText>
+                <SignUpText>Sign Up</SignUpText>
               </SignUpButton>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <Link href="/auth" legacyBehavior>
