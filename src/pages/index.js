@@ -58,7 +58,8 @@ export default function Home() {
         </LeftBox>
         <RighttBox>
           <RightTop>
-
+            <Widget>
+            </Widget>
           </RightTop>
           <RightBottom>
             <BlankBox />
@@ -116,15 +117,24 @@ const RighttBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
 `
 
 const RightTop = styled.div`
   width: 100%;
   height: 75%;
   display: flex;
+  justify-content: flex-end;
+  border-bottom: solid 1px black;
+`
+
+const Widget = styled.div`
+  width: 25%;
+  height: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: solid 1px black;
+  border-left: solid 1px black;
 `
 
 const RightBottom = styled.div`

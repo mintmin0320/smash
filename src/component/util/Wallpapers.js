@@ -1,6 +1,7 @@
 import { faUser, faFolder, faComments } from "@fortawesome/free-solid-svg-icons";
 import styled from 'styled-components';
 import FolderGroup from './FolderGroup';
+import Weather from './widget/weather';
 
 export default function Wallpapers() {
   return (
@@ -40,7 +41,7 @@ export default function Wallpapers() {
           <BlankBox />
           <LogoBox>
             <LogoSize>
-
+              <Weather />
             </LogoSize>
           </LogoBox>
         </RightBottom>

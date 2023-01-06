@@ -24,3 +24,36 @@ export function AnimationGroup() {
     </Lottie>
   );
 }
+
+// export function SunAnimation() {
+//   return (
+//     <Lottie
+//       loop
+//       animationData={group}
+//       play
+//     >
+//     </Lottie>
+//   );
+// }
+
+// export function CloudAnimation() {
+//   return (
+//     <Lottie
+//       loop
+//       animationData={group}
+//       play
+//     >
+//     </Lottie>
+//   );
+// }
+
+// export function RainAnimation() {
+//   return (
+//     <Lottie
+//       loop
+//       animationData={group}
+//       play
+//     >
+//     </Lottie>
+//   );
+// }
