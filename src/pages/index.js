@@ -5,10 +5,10 @@ import Router from "next/router";
 import axios from 'axios';
 import styled from 'styled-components';
 import Modal from '../component/util/Modal';
-import { AnimationGroup } from '../component/util/Lottie';
 import FolderGroup from '../component/util/FolderGroup';
 import Title from '../component/util/Title'
 import SignOutBtn from '../component/util/SignOutBtn'
+import Weather from '../component/util/widget/Weather';
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -59,6 +59,9 @@ export default function Home() {
         <RighttBox>
           <RightTop>
             <Widget>
+              <WeatherBox>
+                {/* <Weather /> */}
+              </WeatherBox>
             </Widget>
           </RightTop>
           <RightBottom>
@@ -100,7 +103,7 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   justify-content: center;
-  background-color: #F8EFFB;;
+  background-color: #F9F2F8;
 `
 
 const Content = styled.div`
@@ -125,16 +128,20 @@ const RightTop = styled.div`
   height: 75%;
   display: flex;
   justify-content: flex-end;
-  border-bottom: solid 1px black;
+  /* border-bottom: solid 1px black; */
 `
 
 const Widget = styled.div`
   width: 25%;
   height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  border-left: solid 1px black;
+  /* border-left: solid 1px black; */
+`
+
+const WeatherBox = styled.div`
+  width: 100%;
+  height: 60%;
 `
 
 const RightBottom = styled.div`
