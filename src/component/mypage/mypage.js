@@ -6,7 +6,7 @@ export default function Mypage() {
       <TopBox>
         <LeftBox>
           <ProfileBox>
-
+            프로필
           </ProfileBox>
         </LeftBox>
         <RightBox>
@@ -14,9 +14,26 @@ export default function Mypage() {
         </RightBox>
       </TopBox>
       <BottomBox>
+        <InfoBox>
+          <InfoTitle>
+            <TextBox>아이디</TextBox>
+            <TextBox>전화번호</TextBox>
+            <TextBox>기타</TextBox>
+            <TextBox>기타</TextBox>
+            <TextBox text={"pass"}>기타</TextBox>
 
+
+          </InfoTitle>
+          <InfoBody>
+            <TextBox>zzang</TextBox>
+            <TextBox>01012345678</TextBox>
+            <TextBox></TextBox>
+            <TextBox></TextBox>
+            <TextBox text={"pass"}></TextBox>
+
+          </InfoBody>
+        </InfoBox>
       </BottomBox>
-      마이페이지
     </Container>
   );
 }
@@ -53,5 +70,35 @@ const RightBox = styled.div`
 const BottomBox = styled.div`
   width: 100%;
   height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: beige;
+`
+
+const InfoBox = styled.div`
+  width: 90%;
+  height: 90%;
+  display: flex;
+  border: solid 1px black;
+`
+
+const InfoTitle = styled.div`
+  width: 50%;
+  height: 100%;
+  border-right: solid 1px black;
+`
+
+const InfoBody = styled.div`
+  width: 50%;
+  height: 100%;
+`
+
+const TextBox = styled.div`
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: ${(props => (props.text === "pass" ? "none" : "solid"))} 1px black;
 `
