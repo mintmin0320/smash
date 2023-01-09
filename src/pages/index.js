@@ -9,6 +9,7 @@ import FolderGroup from '../component/util/FolderGroup';
 import Title from '../component/util/Title'
 import SignOutBtn from '../component/util/SignOutBtn'
 import Weather from '../component/util/widget/Weather';
+import Slick from '../component/util/Slick';
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -60,14 +61,17 @@ export default function Home() {
           <RightTop>
             <Widget>
               <WeatherBox>
-                {/* <Weather /> */}
+                <Weather />
               </WeatherBox>
             </Widget>
           </RightTop>
           <RightBottom>
+            <Slick />
+
             <BlankBox />
             <LogoBox>
               <LogoSize>
+
               </LogoSize>
             </LogoBox>
           </RightBottom>
@@ -164,6 +168,8 @@ const LogoBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: green;
+
 `
 
 const LogoSize = styled.div`
@@ -172,6 +178,8 @@ const LogoSize = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 18px;
+  background-color: red;
 `
 
 const LeftBox = styled.div`

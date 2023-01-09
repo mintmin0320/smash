@@ -1,39 +1,10 @@
 import styled from 'styled-components';
+import Slick from '../util/Slick';
 
 export default function Mypage() {
   return (
     <Container>
-      <TopBox>
-        <LeftBox>
-          <ProfileBox>
-            프로필
-          </ProfileBox>
-        </LeftBox>
-        <RightBox>
-
-        </RightBox>
-      </TopBox>
-      <BottomBox>
-        <InfoBox>
-          <InfoTitle>
-            <TextBox>아이디</TextBox>
-            <TextBox>전화번호</TextBox>
-            <TextBox>기타</TextBox>
-            <TextBox>기타</TextBox>
-            <TextBox text={"pass"}>기타</TextBox>
-
-
-          </InfoTitle>
-          <InfoBody>
-            <TextBox>zzang</TextBox>
-            <TextBox>01012345678</TextBox>
-            <TextBox></TextBox>
-            <TextBox></TextBox>
-            <TextBox text={"pass"}></TextBox>
-
-          </InfoBody>
-        </InfoBox>
-      </BottomBox>
+      <Slick />
     </Container>
   );
 }

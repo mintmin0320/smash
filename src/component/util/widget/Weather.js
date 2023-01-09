@@ -36,7 +36,7 @@ export default function Weather() {
   return (
     <Container>
       <SkyState>
-        {state.sky !== '1' ? <SunAnimation /> : <WindyAnimation />}
+        {state.sky === '1' ? <SunAnimation /> : <WindyAnimation />}
       </SkyState>
       <Temperatures>
         <HighBox>
@@ -58,7 +58,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-background-color: #fff;
 `
 
 const SkyState = styled.div`
