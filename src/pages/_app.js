@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import Axios from 'axios';
+import Script from 'next/script';
 import { AuthProvider } from '../context/auth';
 
 export default function MyApp({ Component, pageProps }) {
@@ -7,6 +8,10 @@ export default function MyApp({ Component, pageProps }) {
   Axios.defaults.withCredentials = true;
   return (
     <AuthProvider>
+      <Script
+        strategy="beforeInteractive"
+        src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_MAP_KEY}`}
+      ></Script>
       <Component {...pageProps} />
     </AuthProvider>
   );

@@ -10,6 +10,7 @@ import Title from '../component/util/Title'
 import SignOutBtn from '../component/util/SignOutBtn'
 import Weather from '../component/util/widget/Weather';
 import Slick from '../component/util/Slick';
+import NaverMap from '../component/util/NaverMap';
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -66,7 +67,7 @@ export default function Home() {
             </Widget>
           </RightTop>
           <RightBottom>
-            <Slick />
+            <NaverMap />
 
             <BlankBox />
             <LogoBox>
