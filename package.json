@@ -25,6 +25,7 @@
     "react-cookie": "^4.1.1",
     "react-dom": "18.2.0",
     "react-lottie-player": "^1.5.0",
+    "react-naver-maps": "^0.0.13",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.6"

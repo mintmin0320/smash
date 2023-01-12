@@ -1,10 +1,12 @@
 import styled from 'styled-components';
-import Slick from '../util/Slick';
+import NaverMap from '../util/NaverMap'
+
 
 export default function Mypage() {
   return (
     <Container>
-      <Slick />
+
+      <NaverMap />
     </Container>
   );
 }

@@ -62,7 +62,7 @@ export default function Home() {
           <RightTop>
             <Widget>
               <WeatherBox>
-                <Weather />
+                {/* <Weather /> */}
               </WeatherBox>
             </Widget>
           </RightTop>

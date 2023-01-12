@@ -6,14 +6,14 @@ import useMap from './useMap';
 const NaverMap = () => {
   useMap();
   return (
-    <Container>
-      <div id="map"></div>
+    <Container id="map">
+
     </Container>
   );
 };
 
 const Container = styled.div`
-width: 800px;
+width: 500px;
 height:300px;
 border: solid 1px black;
 `

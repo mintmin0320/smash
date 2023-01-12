@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import Axios from 'axios';
 import Head from 'next/head'
-import Script from 'next/script'
+import Script from 'next/script';
 import { AuthProvider } from '../context/auth';
 
 export default function MyApp({ Component, pageProps }) {
