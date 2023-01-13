@@ -19,7 +19,7 @@ export default function Wallpapers() {
         </MidBox>
         <MidBox>
           <MainBox>
-            <FolderGroup icon={faFolder} title={"꿩"} />
+            <FolderGroup icon={faFolder} title={"매치"} />
           </MainBox>
         </MidBox>
         <MidBox>
@@ -41,7 +41,6 @@ export default function Wallpapers() {
           <BlankBox />
           <LogoBox>
             <LogoSize>
-              <Weather />
             </LogoSize>
           </LogoBox>
         </RightBottom>

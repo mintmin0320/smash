@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Mypage from '../mypage/mypage';
 import Community from '../community/Community';
+import Match from '../match/Match';
 
 export default function Modal(props) {
   const { open, close, header } = props;
@@ -28,6 +29,11 @@ export default function Modal(props) {
               {header === "커뮤니티" && (
                 <MypageBox>
                   <Community />
+                </MypageBox>
+              )}
+              {header === "매칭" && (
+                <MypageBox>
+                  <Match />
                 </MypageBox>
               )}
             </Main>

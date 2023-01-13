@@ -43,9 +43,11 @@ export default function Home() {
             </Link>
           </MidBox>
           <MidBox>
-            <MainBox onClick={() => openModal("꿩")}>
-              <FolderGroup icon={faFolder} title={"꿩"} />
-            </MainBox>
+            <Link href="/match" legacyBehavior>
+              <MainBox>
+                <FolderGroup icon={faComments} title={"매칭"} />
+              </MainBox>
+            </Link>
           </MidBox>
           <MidBox>
             <MainBox onClick={() => openModal("닭")}>
@@ -62,12 +64,12 @@ export default function Home() {
           <RightTop>
             <Widget>
               <WeatherBox>
-                {/* <Weather /> */}
+
               </WeatherBox>
             </Widget>
           </RightTop>
           <RightBottom>
-            <NaverMap />
+            {/* <NaverMap /> */}
 
             <BlankBox />
             <LogoBox>

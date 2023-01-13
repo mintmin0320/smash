@@ -44,7 +44,6 @@ export default function SignUp() {
       console.log(res);
       console.log("hi");
       if (res.data.result) {
-        console.log("1");
         setState({
           ...state,
           result: true,
