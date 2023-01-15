@@ -1,7 +1,7 @@
 import { faUser, faFolder, faComments } from "@fortawesome/free-solid-svg-icons";
 import styled from 'styled-components';
 import FolderGroup from './FolderGroup';
-import Weather from './widget/weather';
+import Weather from './widget/Weather';
 
 export default function Wallpapers() {
   return (

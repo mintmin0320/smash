@@ -5,7 +5,30 @@ import NaverMap from '../util/NaverMap'
 export default function Match() {
   return (
     <Container>
+      <TopBox>
 
+      </TopBox>
+      <Content>
+        <ListBox>
+          <List>
+            <Profile>
+              <ProfileImg />
+            </Profile>
+            <ListDetail>
+              <Writer>
+                hamin
+              </Writer>
+              <Title>
+                asdasdasdsadsadasdasdassadasdsadads
+              </Title>
+            </ListDetail>
+          </List>
+        </ListBox>
+      </Content>
+
+      <SearchBox>
+
+      </SearchBox>
     </Container>
   );
 }
@@ -13,64 +36,81 @@ export default function Match() {
 const Container = styled.div`
   width: 100%;
   height: 100%;
+  background-color: #9bbbd4;
 `
 
 const TopBox = styled.div`
   width: 100%;
-  height: 30%;
-`
-
-const LeftBox = styled.div`
-  width: 30%;
-  height: 100%;
+  height: 10%;
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+  justify-content: center;
+  border-bottom: solid 1px grey;
 `
 
-const ProfileBox = styled.div`
-  width: 50%;
-  height: 50%;
-  border: solid 1px gray;
-`
-
-const RightBox = styled.div`
-  width: 70%;
-  height: 100%;
-`
-
-const BottomBox = styled.div`
+const Content = styled.div`
   width: 100%;
-  height: 70%;
+  height: 83%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: beige;
+  overflow-y: scroll;
+  overflow: hidden;
 `
 
-const InfoBox = styled.div`
-  width: 90%;
-  height: 90%;
+const ListBox = styled.div`
+  width: 95%;
+  height: 95%;
   display: flex;
-  border: solid 1px black;
+  flex-direction: column;
+  border: solid 1px red;
 `
 
-const InfoTitle = styled.div`
-  width: 50%;
-  height: 100%;
-  border-right: solid 1px black;
-`
-
-const InfoBody = styled.div`
-  width: 50%;
-  height: 100%;
-`
-
-const TextBox = styled.div`
+const List = styled.div`
   width: 100%;
   height: 20%;
   display: flex;
+`
+
+const Profile = styled.div`
+  width: 10%;
+  height: 60%;
+  display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: ${(props => (props.text === "pass" ? "none" : "solid"))} 1px black;
+  
+`
+
+const ProfileImg = styled.div`
+  width: 50%;
+  height: 80%;
+  border-radius: 50%;
+  background-color: white;
+`
+
+const ListDetail = styled.div`
+  
+  height: 100%;
+`
+
+const Writer = styled.div`
+  height: 30%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 16px;
+`
+
+const Title = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  background-color: white;
+  border-radius: 5px 5px 5px 5px;
+  padding: 8px;
+  font-size: 16px;
+`
+
+const SearchBox = styled.div`
+  width: 100%;
+  height: 7%;
+  background-color: white;
 `
