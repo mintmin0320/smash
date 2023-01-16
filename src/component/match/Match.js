@@ -6,7 +6,13 @@ export default function Match() {
   return (
     <Container>
       <TopBox>
+        <WriteButtonBox />
+        <FolderNameBox>
+          그룹 매칭
+        </FolderNameBox>
+        <WriteButtonBox>
 
+        </WriteButtonBox>
       </TopBox>
       <Content>
         <ListBox>
@@ -19,15 +25,13 @@ export default function Match() {
                 hamin
               </Writer>
               <Title>
-                asdasdasdsadsadasdasdassadasdsadads
+                [ 코딩 ] 코딩 스터디그룹 멤버를 구합니다!!
               </Title>
             </ListDetail>
           </List>
         </ListBox>
       </Content>
-
       <SearchBox>
-
       </SearchBox>
     </Container>
   );
@@ -47,6 +51,22 @@ const TopBox = styled.div`
   border-bottom: solid 1px grey;
 `
 
+const FolderNameBox = styled.div`
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bolder;
+`
+
+const WriteButtonBox = styled.div`
+  width: 15%;
+  height: 100%;
+`
+
 const Content = styled.div`
   width: 100%;
   height: 83%;
@@ -62,7 +82,6 @@ const ListBox = styled.div`
   height: 95%;
   display: flex;
   flex-direction: column;
-  border: solid 1px red;
 `
 
 const List = styled.div`
@@ -87,8 +106,7 @@ const ProfileImg = styled.div`
   background-color: white;
 `
 
-const ListDetail = styled.div`
-  
+const ListDetail = styled.div`  
   height: 100%;
 `
 
@@ -107,6 +125,8 @@ const Title = styled.div`
   border-radius: 5px 5px 5px 5px;
   padding: 8px;
   font-size: 16px;
+  cursor: pointer;
+
 `
 
 const SearchBox = styled.div`
