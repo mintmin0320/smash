@@ -1,8 +1,111 @@
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass, faRotateRight, faBars } from "@fortawesome/free-solid-svg-icons";
 import NaverMap from '../util/NaverMap'
 
 
 export default function Match() {
+  const [state, setState] = useState({
+    body: '',
+    userId: '',
+    comment: '',
+    search: '',
+    groupList: [],
+  });
+
+  const handleInputChange = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  useEffect(() => {
+    getGroupList();
+  }, []);
+
+  const getGroupList = async () => {
+    const url = `/match/list`;
+    const res = await axios.get(url);
+    console.log(res);
+    try {
+      if (res.status === 200) {
+        if (res.data.groupList === null) {
+          setState({
+            ...state,
+            groupList: [],
+          });
+          console.log("그룹이 존재하지 않습니다.");
+        }
+        else {
+          setState({
+            ...state,
+            groupList: res.data.groupList,
+          });
+          console.log("그룹 목록 조회 성공");
+        }
+      }
+      else {
+        console.log("그룹 목록 조회 실패");
+        history.back();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSearchButton = () => {
+    if (state.search === '') {
+      alert("Please enter your search term !!");
+    } else {
+      getSearchTitle();
+    }
+  }
+
+  const getSearchTitle = async () => {
+    const url = `/match/${state.search}`
+    console.log(url);
+    const res = await axios.get(url);
+    console.log(res);
+    try {
+      if (res.status === 200) {
+        setState({
+          ...state,
+          groupList: res.data.matchList,
+        });
+        console.log("그룹 검색 성공");
+      } else {
+        console.log("그룹 검색 실패");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const GroupList = () => {
+    return (
+      <ListBox>
+        {
+          state.groupList.map((item, idx) => {
+            return (
+              <List key={idx}>
+                <Profile>
+                  <ProfileImg />
+                </Profile>
+                <ListDetail>
+                  <Writer>hamin</Writer>
+                  <Title>{item.title}</Title>
+                </ListDetail>
+              </List>
+            )
+          })
+        };
+      </ListBox>
+    );
+  };
+
   return (
     <Container>
       <TopBox>
@@ -10,28 +113,34 @@ export default function Match() {
         <FolderNameBox>
           그룹 매칭
         </FolderNameBox>
-        <WriteButtonBox>
+        <WriteButtonBox search={"search"}>
+          <RefreshButton>
+            <FontAwesomeIcon icon={faRotateRight} size="2x" />
+          </RefreshButton>
+          <CreateGroupBtn>
+            <FontAwesomeIcon icon={faRotateRight} size="2x" />
 
+          </CreateGroupBtn>
         </WriteButtonBox>
       </TopBox>
       <Content>
         <ListBox>
-          <List>
-            <Profile>
-              <ProfileImg />
-            </Profile>
-            <ListDetail>
-              <Writer>
-                hamin
-              </Writer>
-              <Title>
-                [ 코딩 ] 코딩 스터디그룹 멤버를 구합니다!!
-              </Title>
-            </ListDetail>
-          </List>
+          <GroupList />
         </ListBox>
       </Content>
       <SearchBox>
+        <Input
+          type="text"
+          value={state.search}
+          name="search"
+          onChange={handleInputChange}
+          maxLength={15}
+          placeholder="Please enter your search term"
+        // onKeyPress={(e) => { handleEnterPress("pw", e) }}
+        />
+        <SearchButton onClick={handleSearchButton}>
+          <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" />
+        </SearchButton>
       </SearchBox>
     </Container>
   );
@@ -65,6 +174,25 @@ const FolderNameBox = styled.div`
 const WriteButtonBox = styled.div`
   width: 15%;
   height: 100%;
+  display: flex;
+  border-left: ${(props => (props.search === "search" ? "solid" : "none"))} 1px black;
+`
+
+const RefreshButton = styled.div`
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: solid 1px black;
+`
+
+const CreateGroupBtn = styled.div`
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const Content = styled.div`
@@ -88,6 +216,11 @@ const List = styled.div`
   width: 100%;
   height: 20%;
   display: flex;
+  cursor: pointer;
+
+  &:hover{  
+    background-color : skyblue;
+  }
 `
 
 const Profile = styled.div`
@@ -125,12 +258,33 @@ const Title = styled.div`
   border-radius: 5px 5px 5px 5px;
   padding: 8px;
   font-size: 16px;
-  cursor: pointer;
-
 `
 
 const SearchBox = styled.div`
   width: 100%;
-  height: 7%;
+  height: 8%;
+  display: flex;
   background-color: white;
+`
+
+// 검색창
+const Input = styled.input`
+  font-size: 22px;
+  border: none;
+  width: 98%;
+  height: 100%;
+  
+
+  &:focus{
+    outline: none;
+  }
+`
+
+const SearchButton = styled.div`
+  width: 7%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 `

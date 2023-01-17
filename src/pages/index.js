@@ -72,11 +72,11 @@ export default function Home() {
             {/* <NaverMap /> */}
 
             <BlankBox />
-            <LogoBox>
-              <LogoSize>
 
-              </LogoSize>
-            </LogoBox>
+
+
+
+
           </RightBottom>
         </RighttBox>
       </Content>
