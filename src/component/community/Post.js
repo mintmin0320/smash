@@ -41,7 +41,7 @@ export default function Post(props) {
     }
   };
 
-  const handleBackButton = () => {
+  const handleRefreshButton = () => {
     window.location.reload();
   };
 
@@ -59,7 +59,7 @@ export default function Post(props) {
             {state.body}
           </BodyBox>
           <MenuBox>
-            <ListButton onClick={handleBackButton}>
+            <ListButton onClick={handleRefreshButton}>
               목록
             </ListButton>
             {state.userId === user && (

@@ -12,6 +12,7 @@ export default function Match() {
     userId: '',
     comment: '',
     search: '',
+    menu: false,
     groupList: [],
   });
 
@@ -20,6 +21,17 @@ export default function Match() {
       ...state,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleClickMenu = () => {
+    setState({
+      ...state,
+      menu: !state.menu,
+    });
+  };
+
+  const handleRefreshButton = () => {
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -113,21 +125,25 @@ export default function Match() {
         <FolderNameBox>
           그룹 매칭
         </FolderNameBox>
-        <WriteButtonBox search={"search"}>
-          <RefreshButton>
+        <WriteButtonBox>
+          <RefreshButton onClick={handleRefreshButton}>
             <FontAwesomeIcon icon={faRotateRight} size="2x" />
           </RefreshButton>
-          <CreateGroupBtn>
-            <FontAwesomeIcon icon={faRotateRight} size="2x" />
-
-          </CreateGroupBtn>
+          <MenubarButton onClick={handleClickMenu}>
+            <FontAwesomeIcon icon={faBars} size="2x" />
+          </MenubarButton>
         </WriteButtonBox>
       </TopBox>
-      <Content>
-        <ListBox>
-          <GroupList />
-        </ListBox>
-      </Content>
+      {!state.menu
+        ?
+        <Content>
+          <ListBox>
+            {/* <GroupList /> */}
+          </ListBox>
+        </Content>
+        :
+        <MenuBox />
+      }
       <SearchBox>
         <Input
           type="text"
@@ -184,15 +200,16 @@ const RefreshButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-left: solid 1px black;
+  cursor: pointer;
 `
 
-const CreateGroupBtn = styled.div`
+const MenubarButton = styled.div`
   width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `
 
 const Content = styled.div`
@@ -287,4 +304,15 @@ const SearchButton = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+`
+
+const MenuBox = styled.div`
+  width: 100%;
+  height: 83%;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+  overflow: hidden; */
+  background-color: red;
 `
