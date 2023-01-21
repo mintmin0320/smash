@@ -4,6 +4,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faRotateRight, faBars } from "@fortawesome/free-solid-svg-icons";
 import NaverMap from '../util/NaverMap'
+import router from 'next/router'
 
 
 export default function Match() {
@@ -76,6 +77,16 @@ export default function Match() {
     }
   }
 
+  const aa = (e, id) => {
+    console.log(id);
+    router.push({
+      pathname: `/match/${id}`,
+      query: { id: id },
+    },
+      `/match/${id}`
+    );
+  }
+
   const getSearchTitle = async () => {
     const url = `/match/${state.search}`
     console.log(url);
@@ -102,7 +113,7 @@ export default function Match() {
         {
           state.groupList.map((item, idx) => {
             return (
-              <List key={idx}>
+              <List key={idx} onClick={(e) => { aa(e, item._id) }}>
                 <Profile>
                   <ProfileImg />
                 </Profile>
@@ -138,7 +149,7 @@ export default function Match() {
         ?
         <Content>
           <ListBox>
-            {/* <GroupList /> */}
+            <GroupList />
           </ListBox>
         </Content>
         :
