@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faRotateRight, faBars } from "@fortawesome/free-solid-svg-icons";
 import NaverMap from '../util/NaverMap'
 import router from 'next/router'
+import DetailPage from './DetailPage';
 
 
 export default function Match() {
@@ -14,6 +15,8 @@ export default function Match() {
     comment: '',
     search: '',
     menu: false,
+    detail: false,
+    matchId: '',
     groupList: [],
   });
 
@@ -107,13 +110,22 @@ export default function Match() {
     }
   };
 
+  const handleDetailView = async (id) => {
+    console.log(id);
+    setState({
+      ...state,
+      matchId: id,
+      detail: true
+    });
+  };
+
   const GroupList = () => {
     return (
       <ListBox>
         {
           state.groupList.map((item, idx) => {
             return (
-              <List key={idx} onClick={(e) => { aa(e, item._id) }}>
+              <List key={idx} onClick={() => handleDetailView(item._id)}>
                 <Profile>
                   <ProfileImg />
                 </Profile>
@@ -145,15 +157,18 @@ export default function Match() {
           </MenubarButton>
         </WriteButtonBox>
       </TopBox>
-      {!state.menu
+      {state.menu
         ?
-        <Content>
-          <ListBox>
-            <GroupList />
-          </ListBox>
-        </Content>
-        :
         <MenuBox />
+        :
+        state.detail ?
+          <DetailPage matchId={state.matchId} />
+          :
+          <Content>
+            <ListBox>
+              {/* <GroupList /> */}
+            </ListBox>
+          </Content>
       }
       <SearchBox>
         <Input
