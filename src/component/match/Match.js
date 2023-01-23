@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faRotateRight, faBars } from "@fortawesome/free-solid-svg-icons";
-import NaverMap from '../util/NaverMap'
-import router from 'next/router'
+import { faMagnifyingGlass, faRotateRight, faBars, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import DetailPage from './DetailPage';
+import Recruit from './Recruit';
 
 
 export default function Match() {
@@ -16,6 +15,7 @@ export default function Match() {
     search: '',
     menu: false,
     detail: false,
+    recruit: false,
     matchId: '',
     groupList: [],
   });
@@ -27,15 +27,22 @@ export default function Match() {
     });
   };
 
-  const handleClickMenu = () => {
-    setState({
-      ...state,
-      menu: !state.menu,
-    });
-  };
-
-  const handleRefreshButton = () => {
-    window.location.reload();
+  const handleChange = (value) => {
+    if (value === "menu") {
+      setState({
+        ...state,
+        menu: !state.menu,
+      });
+    }
+    else if (value === "recruit") {
+      setState({
+        ...state,
+        recruit: true,
+      });
+    }
+    else if (value === "refresh") {
+      window.location.reload();
+    }
   };
 
   useEffect(() => {
@@ -78,16 +85,6 @@ export default function Match() {
     } else {
       getSearchTitle();
     }
-  }
-
-  const aa = (e, id) => {
-    console.log(id);
-    router.push({
-      pathname: `/match/${id}`,
-      query: { id: id },
-    },
-      `/match/${id}`
-    );
   }
 
   const getSearchTitle = async () => {
@@ -149,10 +146,13 @@ export default function Match() {
           그룹 매칭
         </FolderNameBox>
         <WriteButtonBox>
-          <RefreshButton onClick={handleRefreshButton}>
+          <MenubarButton onClick={() => handleChange("refresh")}>
             <FontAwesomeIcon icon={faRotateRight} size="2x" />
-          </RefreshButton>
-          <MenubarButton onClick={handleClickMenu}>
+          </MenubarButton>
+          <MenubarButton onClick={() => handleChange("recruit")}>
+            <FontAwesomeIcon icon={faUserPlus} size="2x" />
+          </MenubarButton>
+          <MenubarButton onClick={() => handleChange("menu")}>
             <FontAwesomeIcon icon={faBars} size="2x" />
           </MenubarButton>
         </WriteButtonBox>
@@ -164,13 +164,16 @@ export default function Match() {
         state.detail ?
           <DetailPage matchId={state.matchId} />
           :
-          <Content>
-            <ListBox>
-              <GroupList />
-            </ListBox>
-          </Content>
+          state.recruit ?
+            <Recruit />
+            :
+            <Content>
+              <ListBox>
+                <GroupList />
+              </ListBox>
+            </Content>
       }
-      {!state.detail && (
+      {!state.detail && !state.recruit && (
         <SearchBox>
           <Input
             type="text"
@@ -222,17 +225,8 @@ const WriteButtonBox = styled.div`
   border-left: ${(props => (props.search === "search" ? "solid" : "none"))} 1px black;
 `
 
-const RefreshButton = styled.div`
-  width: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-`
-
 const MenubarButton = styled.div`
-  width: 50%;
+  width: 33.3%;
   height: 100%;
   display: flex;
   align-items: center;

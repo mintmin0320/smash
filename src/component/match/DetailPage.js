@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import axios from 'axios';
 import NaverMap from '../util/NaverMap';
 
-
 export default function DetailPage(props) {
   const [state, setState] = useState({
     body: '',
@@ -38,7 +37,6 @@ export default function DetailPage(props) {
 
   return (
     <Container>
-
       <TopBox>
         <TitleBox>
           <Title>
@@ -75,14 +73,8 @@ export default function DetailPage(props) {
           <Location>
             <NaverMap />
           </Location>
-
         </LocationBox>
-
       </BottomBox>
-
-
-
-
     </Container >
   )
 }
