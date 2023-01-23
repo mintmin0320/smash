@@ -166,24 +166,26 @@ export default function Match() {
           :
           <Content>
             <ListBox>
-              {/* <GroupList /> */}
+              <GroupList />
             </ListBox>
           </Content>
       }
-      <SearchBox>
-        <Input
-          type="text"
-          value={state.search}
-          name="search"
-          onChange={handleInputChange}
-          maxLength={15}
-          placeholder="Please enter your search term"
-        // onKeyPress={(e) => { handleEnterPress("pw", e) }}
-        />
-        <SearchButton onClick={handleSearchButton}>
-          <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" />
-        </SearchButton>
-      </SearchBox>
+      {!state.detail && (
+        <SearchBox>
+          <Input
+            type="text"
+            value={state.search}
+            name="search"
+            onChange={handleInputChange}
+            maxLength={15}
+          // placeholder="Please enter your search term"
+          // onKeyPress={(e) => { handleEnterPress("pw", e) }}
+          />
+          <SearchButton onClick={handleSearchButton}>
+            <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" />
+          </SearchButton>
+        </SearchBox>
+      )}
     </Container>
   );
 }

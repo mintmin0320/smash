@@ -13,8 +13,8 @@ const NaverMap = () => {
 };
 
 const Container = styled.div`
-width: 500px;
-height:300px;
+width: 950px;
+height: 300px;
 border: solid 1px black;
 `
 
