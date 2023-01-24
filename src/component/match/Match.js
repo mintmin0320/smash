@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faRotateRight, faBars, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import DetailPage from './DetailPage';
 import Recruit from './Recruit';
+import data from './categoryList'
 
 
 export default function Match() {
@@ -17,6 +18,8 @@ export default function Match() {
     detail: false,
     recruit: false,
     matchId: '',
+    num: '',
+    category: '',
     groupList: [],
   });
 
@@ -116,6 +119,36 @@ export default function Match() {
     });
   };
 
+  const handleClick = (idx, item) => {
+    console.log(idx, item);
+    setState({
+      ...state,
+      category: item,
+      num: idx,
+    });
+  };
+
+  const Item = () => {
+    return (
+      <React.Fragment>
+        {
+          data.map((item, idx) => {
+            return (
+              <div key={idx}
+                onClick={() => handleClick(idx, item.title)}
+                value={idx}
+                className={"card" + (idx === state.num ? " active" : "")}
+              >
+                <CardLogo>{item.icon}</CardLogo>
+                <CardTitle>{item.title}</CardTitle>
+              </div>
+            )
+          })
+        }
+      </React.Fragment>
+    );
+  }
+
   const GroupList = () => {
     return (
       <ListBox>
@@ -133,7 +166,7 @@ export default function Match() {
               </List>
             )
           })
-        };
+        }
       </ListBox>
     );
   };
@@ -157,10 +190,7 @@ export default function Match() {
           </MenubarButton>
         </WriteButtonBox>
       </TopBox>
-      {state.menu
-        ?
-        <MenuBox />
-        :
+      {
         state.detail ?
           <DetailPage matchId={state.matchId} />
           :
@@ -171,6 +201,21 @@ export default function Match() {
               <ListBox>
                 <GroupList />
               </ListBox>
+              {state.menu
+                ?
+                <MenuBox>
+                  <CategoryList>
+                    <Item />
+                  </CategoryList>
+                  <ButtonBox>
+                    <ConfirmButton>
+                      선택
+                    </ConfirmButton>
+                  </ButtonBox>
+                </MenuBox>
+                :
+                <BlankBox />
+              }
             </Content>
       }
       {!state.detail && !state.recruit && (
@@ -238,22 +283,21 @@ const Content = styled.div`
   width: 100%;
   height: 83%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
   overflow-y: scroll;
   overflow: hidden;
 `
 
 const ListBox = styled.div`
-  width: 95%;
-  height: 95%;
+  width: 68%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 `
 
 const List = styled.div`
   width: 100%;
-  height: 20%;
+  height: 17%;
   display: flex;
   cursor: pointer;
 
@@ -272,8 +316,8 @@ const Profile = styled.div`
 `
 
 const ProfileImg = styled.div`
-  width: 50%;
-  height: 80%;
+  width: 70%;
+  height: 70%;
   border-radius: 50%;
   background-color: white;
 `
@@ -328,13 +372,73 @@ const SearchButton = styled.div`
   cursor: pointer;
 `
 
+const BlankBox = styled.div`
+  width: 30%;
+  height: 100%;
+`
+
 const MenuBox = styled.div`
-  width: 100%;
-  height: 83%;
-  /* display: flex;
-  justify-content: center;
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  overflow-y: scroll;
-  overflow: hidden; */
-  background-color: red;
+  background-color: #E6E6E6;
+  border-left: solid 1px #E6E6E6;
+  border-right: solid 1px #E6E6E6;
+`
+
+const CategoryList = styled.div`
+  width: 95%;
+  height: 50%;
+  border-bottom: solid 1px black;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+  .card{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+
+    &.active {
+      background-color: black;
+      color: #fff;
+    }
+  }
+`
+
+const CardLogo = styled.div`
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const CardTitle = styled.div`
+  width: 100%;
+  height: 20%;
+`
+
+const ButtonBox = styled.div`
+  width: 100%;
+  height: 45%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+`
+
+const ConfirmButton = styled.div`
+  width: 30%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  border-radius: 12px 12px 12px 12px;
+  border: solid 1px black;
 `

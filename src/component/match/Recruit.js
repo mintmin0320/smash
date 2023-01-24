@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAndroid, faJava, faPython, faJs } from "@fortawesome/free-brands-svg-icons";
-import { faDatabase, faC, faRobot, faLock, faGlobe, faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import NaverMap from '../util/NaverMap';
+import data from './categoryList';
 
 
 export default function Recruit(props) {
@@ -14,8 +12,10 @@ export default function Recruit(props) {
     body: '',
     userId: '',
     category: '',
-    cc: false,
+    num: '',
   });
+
+
 
   const handleInputChange = (e) => {
     setState({
@@ -24,14 +24,35 @@ export default function Recruit(props) {
     });
   };
 
-  const handleClick = (item) => {
-    console.log(item);
+  const handleClick = (idx, item) => {
+    console.log(idx, item);
     setState({
       ...state,
       category: item,
-      cc: true
+      num: idx,
     });
   };
+
+  const Item = () => {
+    return (
+      <React.Fragment>
+        {
+          data.map((item, idx) => {
+            return (
+              <div key={idx}
+                onClick={() => handleClick(idx, item.title)}
+                value={idx}
+                className={"card" + (idx === state.num ? " active" : "")}
+              >
+                <CardLogo>{item.icon}</CardLogo>
+                <CardTitle>{item.title}</CardTitle>
+              </div>
+            )
+          })
+        }
+      </React.Fragment>
+    );
+  }
 
   // useEffect(() => {
   //   getPostData();
@@ -106,66 +127,7 @@ export default function Recruit(props) {
         <Content>
           <CategoryBox>
             <Category>
-              <Card onClick={() => handleClick("java")} check={state.cc}>
-                <CardLogo>
-                  <FontAwesomeIcon icon={faJava} size="4x" />
-                </CardLogo>
-                <CardTitle>Java</CardTitle>
-              </Card>
-              <Card onClick={() => handleClick("python")} check={state.cc}>
-                <CardLogo>
-                  <FontAwesomeIcon icon={faPython} size="4x" />
-                </CardLogo>
-                <CardTitle>Python</CardTitle>
-              </Card>
-              <Card onClick={() => handleClick("c")}>
-                <CardLogo>
-                  <FontAwesomeIcon icon={faC} size="4x" />
-                </CardLogo>
-                <CardTitle>C</CardTitle>
-              </Card>
-              <Card onClick={() => handleClick("js")}>
-                <CardLogo>
-                  <FontAwesomeIcon icon={faJs} size="4x" />
-                </CardLogo>
-                <CardTitle>JS</CardTitle>
-              </Card>
-              <Card onClick={() => handleClick("db")}>
-                <CardLogo>
-                  <FontAwesomeIcon icon={faDatabase} size="4x" />
-                </CardLogo>
-                DB
-              </Card>
-              <Card onClick={() => handleClick("iot")}>
-                <CardLogo>
-                  <FontAwesomeIcon icon={faRobot} size="4x" />
-                </CardLogo>
-                IoT
-              </Card>
-              <Card onClick={() => handleClick("android")}>
-                <CardLogo>
-                  <FontAwesomeIcon icon={faAndroid} size="4x" />
-                </CardLogo>
-                <CardTitle>Android</CardTitle>
-              </Card>
-              <Card onClick={() => handleClick("security")}>
-                <CardLogo>
-                  <FontAwesomeIcon icon={faLock} size="4x" />
-                </CardLogo>
-                <CardTitle>Security</CardTitle>
-              </Card>
-              <Card onClick={() => handleClick("network")}>
-                <CardLogo>
-                  <FontAwesomeIcon icon={faGlobe} size="4x" />
-                </CardLogo>
-                <CardTitle>Network</CardTitle>
-              </Card>
-              <Card onClick={() => handleClick("etc")}>
-                <CardLogo>
-                  <FontAwesomeIcon icon={faEllipsis} size="4x" />
-                </CardLogo>
-                <CardTitle>ETC</CardTitle>
-              </Card>
+              <Item />
             </Category>
           </CategoryBox>
           <BodyBox>
@@ -202,7 +164,7 @@ const Container = styled.div`
 `
 
 const TopBox = styled.div`
-  width: 90%;
+  width: 85%;
   height: 20%;
   display: flex;
   flex-direction: column;
@@ -284,7 +246,7 @@ const Date = styled.div`
 `
 
 const BottomBox = styled.div`
-  width: 90%;
+  width: 85%;
   height: 80%;
   display: flex;
   flex-direction: column;
@@ -315,6 +277,20 @@ const Category = styled.div`
   /* border: solid 1px black; */
   background-color: #F2F2F2;
   display: flex;
+
+  .card{
+    width: 10%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px white;
+    cursor: pointer;
+
+    &.active {
+      background-color: black;
+      color: #fff;
+    }
+  }
 `
 
 const BodyBox = styled.div`
@@ -369,25 +345,6 @@ const Location = styled.div`
   background-color: #fff;
   display: flex;
   justify-content: center;
-`
-
-const Card = styled.div`
-  width: 10%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  border: solid 1px white;
-  cursor: pointer;
-  background-color: ${(props => (props.check ? "red" : "blue"))};
-`
-
-const SelectedCard = styled.div`
-  width: 10%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  border: solid 1px black;
-  cursor: pointer;
 `
 
 const CardLogo = styled.div`
