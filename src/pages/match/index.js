@@ -48,5 +48,5 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   justify-content: center;
-  background-color: #F8EFFB;;
+  background-color: #F8EFFB;
 `

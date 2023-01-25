@@ -6,49 +6,49 @@ import styled from 'styled-components';
 
 export default function Slick() {
   const settings = {
-    dots: true,
-    infinite: true,
+    dots: true,  // 점은 안 보이게
+    infinite: true, // 무한으로 즐기게
     speed: 500,
-    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 10000,
+    slidesToShow: 1, //4장씩 보이게 해주세요
+    slidesToScroll: 1, //1장씩 넘어가세요
   };
+
   return (
     <Container>
 
       <Slider {...settings}>
-        <C>
-          1
-        </C>
-        <C>
-          2
-        </C>
-
+        <div>
+          <h3>1</h3>
+        </div>
+        <div>
+          <h3>2</h3>
+        </div>
+        <div>
+          <h3>3</h3>
+        </div>
+        <div>
+          <h3>4</h3>
+        </div>
+        <div>
+          <h3>5</h3>
+        </div>
+        <div>
+          <h3>6</h3>
+        </div>
       </Slider>
-
-      <Slider {...settings}>
-
-
-
-      </Slider>
-
     </Container>
-
-  );
+  )
 }
 
 const Container = styled.div`
   width: 100%;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: solid 1px black;
+  height: 100%;
 `
 
-const C = styled.div`
-  width: 10%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: red;
-`
+
+// const Wrap = styled.div`
+//   width: 100%;
+//   height: 100%;
+// `

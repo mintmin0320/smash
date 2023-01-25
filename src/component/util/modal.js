@@ -83,7 +83,7 @@ const Container = styled.div`
 
 const SectionBox = styled.div`
   width: 90%;
-  max-width: 1650px;
+  /* max-width: 1650px; */
   height: 850px;
   background-color: #fff; 
   overflow: hidden;
@@ -91,6 +91,10 @@ const SectionBox = styled.div`
   border-radius: 11px 11px 11px 11px;
   //팝업이 열릴때 스르륵 열리는 효과
   animation: modal-show 0.3s;
+
+  @media ( max-width: 1500px ) {
+    height: 650px;
+  }
 `
 
 const MenubarBox = styled.div`
@@ -139,7 +143,7 @@ const Main = styled.div`
 `
 
 const MypageBox = styled.button`
-  width: 50%;
+  width: 80%;
   height: 90%;
   display: flex;
   justify-content: center;

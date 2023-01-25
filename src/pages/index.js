@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { faUser, faFolder, faComments } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faFolder, faComments, faUsersRays } from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link';
 import Router from "next/router";
 import axios from 'axios';
@@ -45,7 +45,7 @@ export default function Home() {
           <MidBox>
             <Link href="/match" legacyBehavior>
               <MainBox>
-                <FolderGroup icon={faComments} title={"매칭"} />
+                <FolderGroup icon={faUsersRays} title={"매칭"} />
               </MainBox>
             </Link>
           </MidBox>
@@ -62,21 +62,17 @@ export default function Home() {
         </LeftBox>
         <RighttBox>
           <RightTop>
+            <Slide>
+              <Slick />
+            </Slide>
             <Widget>
               <WeatherBox>
-
+                Weather
               </WeatherBox>
             </Widget>
           </RightTop>
           <RightBottom>
-            {/* <NaverMap /> */}
-
-            <BlankBox />
-
-
-
-
-
+            미정
           </RightBottom>
         </RighttBox>
       </Content>
@@ -85,26 +81,26 @@ export default function Home() {
   );
 };
 
-export const getServerSideProps = async ({ req, res }) => {
-  try {
-    const cookie = req.headers.cookie;
-    //쿠키가 없다면 에러를 보내기
-    if (!cookie) throw new Error("Missing auth token cookie");
+// export const getServerSideProps = async ({ req, res }) => {
+//   try {
+//     const cookie = req.headers.cookie;
+//     //쿠키가 없다면 에러를 보내기
+//     if (!cookie) throw new Error("Missing auth token cookie");
 
-    // 그 쿠키를 이용해서 백엔드에서 인증 처리하기
-    const res = await axios.get("/auth/signStatus", { headers: { cookie } })
-    console.log(res.data);
+//     // 그 쿠키를 이용해서 백엔드에서 인증 처리하기
+//     const res = await axios.get("/auth/signStatus", { headers: { cookie } })
+//     console.log(res.data);
 
-    console.log("로그인상태");
+//     console.log("로그인상태");
 
-    return { props: {} }
+//     return { props: {} }
 
-  } catch (error) {
-    console.log("로그인상태 x");
-    res.writeHead(307, { Location: "/auth" }).end();
-    return { props: {} }
-  }
-};
+//   } catch (error) {
+//     console.log("로그인상태 x");
+//     res.writeHead(307, { Location: "/auth" }).end();
+//     return { props: {} }
+//   }
+// };
 
 const Container = styled.div`
   width: 100%;
@@ -138,6 +134,12 @@ const RightTop = styled.div`
   /* border-bottom: solid 1px black; */
 `
 
+const Slide = styled.div`
+  width: 75%;
+  height: 100%;
+  border: solid 1px black;
+`
+
 const Widget = styled.div`
   width: 25%;
   height: 100%;
@@ -149,6 +151,7 @@ const Widget = styled.div`
 const WeatherBox = styled.div`
   width: 100%;
   height: 60%;
+  border: solid 1px black;
 `
 
 const RightBottom = styled.div`
@@ -157,32 +160,6 @@ const RightBottom = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 50px;
-`
-
-const BlankBox = styled.div`
-  width: 70%;
-  height: 100%;
-`
-
-const LogoBox = styled.div`
-  width: 30%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: green;
-
-`
-
-const LogoSize = styled.div`
-  width: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  background-color: red;
 `
 
 const LeftBox = styled.div`
@@ -197,6 +174,10 @@ const MidBox = styled.div`
   height: 10%;
   display: flex;
   justify-content: space-between;
+
+  @media ( max-width: 1500px ) {
+    height: 13%;
+  }
 `
 
 const MainBox = styled.div`
@@ -205,7 +186,7 @@ const MainBox = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  
+
   &:hover{  
     border: solid #FAFAFA;
   }

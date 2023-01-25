@@ -1,7 +1,6 @@
-import { faUser, faFolder, faComments } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faFolder, faComments, faUsersRays } from "@fortawesome/free-solid-svg-icons";
 import styled from 'styled-components';
 import FolderGroup from './FolderGroup';
-import Weather from './widget/Weather';
 
 export default function Wallpapers() {
   return (
@@ -19,7 +18,7 @@ export default function Wallpapers() {
         </MidBox>
         <MidBox>
           <MainBox>
-            <FolderGroup icon={faFolder} title={"매치"} />
+            <FolderGroup icon={faUsersRays} title={"매칭"} />
           </MainBox>
         </MidBox>
         <MidBox>
