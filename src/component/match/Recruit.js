@@ -146,9 +146,15 @@ export default function Recruit(props) {
           </LocationInfo>
           <Location>
             <NaverMap />
+            <WriteButtonBox>
+              <WriteButton>
+                확인
+              </WriteButton>
+            </WriteButtonBox>
           </Location>
         </LocationBox>
       </BottomBox>
+
     </Container >
   );
 };
@@ -344,7 +350,9 @@ const Location = styled.div`
   height: 500px;
   background-color: #fff;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
 `
 
 const CardLogo = styled.div`
@@ -359,3 +367,21 @@ const CardTitle = styled.div`
   width: 100%;
   height: 20%;
 `
+
+const WriteButtonBox = styled.div`
+  width: 82%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const WriteButton = styled.div`
+  width: 25%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F2F2F2;
+`
+

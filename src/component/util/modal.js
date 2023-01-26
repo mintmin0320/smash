@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Mypage from '../mypage/mypage';
+import Mypage from '../mypage/Mypage';
 import Community from '../community/Community';
 import Match from '../match/Match';
 
@@ -21,7 +21,7 @@ export default function Modal(props) {
               </NameBox>
             </MenubarBox>
             <Main>
-              {header === "내정보" && (
+              {header === "마이페이지" && (
                 <MypageBox>
                   <Mypage />
                 </MypageBox>

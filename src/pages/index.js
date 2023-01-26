@@ -31,8 +31,8 @@ export default function Home() {
       <Content>
         <LeftBox>
           <MidBox>
-            <MainBox onClick={() => openModal("내정보")}>
-              <FolderGroup icon={faUser} title={"내정보"} />
+            <MainBox onClick={() => openModal("마이페이지")}>
+              <FolderGroup icon={faUser} title={"마이페이지"} />
             </MainBox>
           </MidBox>
           <MidBox>
