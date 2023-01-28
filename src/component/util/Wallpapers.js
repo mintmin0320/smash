@@ -115,6 +115,10 @@ const MidBox = styled.div`
   height: 10%;
   display: flex;
   justify-content: space-between;
+
+  @media ( max-width: 1500px ) {
+    height: 13%;
+  }
 `
 
 const MainBox = styled.div`
