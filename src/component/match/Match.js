@@ -35,12 +35,14 @@ export default function Match() {
       setState({
         ...state,
         menu: !state.menu,
+        num: '',
       });
     }
     else if (value === "recruit") {
       setState({
         ...state,
         recruit: true,
+        detail: false,
       });
     }
     else if (value === "refresh") {

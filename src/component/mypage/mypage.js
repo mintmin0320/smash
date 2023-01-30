@@ -16,10 +16,22 @@ export default function Mypage() {
           <IdBox>
             Id
           </IdBox>
+          <LocationBox>
+            거주지
+          </LocationBox>
         </InfoBox>
       </LeftBox>
       <RightBox>
+        <TopBox>
 
+
+        </TopBox>
+        <BottomBox>
+          <TitleBox>
+            Group
+          </TitleBox>
+
+        </BottomBox>
       </RightBox>
     </Container>
   );
@@ -80,22 +92,45 @@ const IdBox = styled.div`
   color: #BDBDBD;
 `
 
+const LocationBox = styled.div`
+  width: 75%;
+  height: 10%;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 16px;
+`
+
 const RightBox = styled.div`
   width: 68%;
   height: 95%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
   border: solid 1px #D8D8D8;
   border-radius: 10px 10px 10px 10px;
 `
 
+const TopBox = styled.div`
+  width: 100%;
+  height: 25%;
+`
 
+const BottomBox = styled.div`
+  width: 100%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
-const InfoTitle = styled.div`
-  width: 50%;
-  height: 100%;
-  border-right: solid 2px black;
+const TitleBox = styled.div`
+  width: 95%;
+  height: 10%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 26px;
+  border-bottom: solid 1px #D8D8D8;
 `
 
 const InfoBody = styled.div`
