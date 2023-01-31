@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ImgUpload from '../util/ImgUpload';
 import NaverMap from '../util/NaverMap'
 
 
@@ -6,9 +7,8 @@ export default function Mypage() {
   return (
     <Container>
       <LeftBox>
-        <ProfileBox>
-          <Profile></Profile>
-        </ProfileBox>
+        <ImgUpload />
+
         <InfoBox>
           <NameBox>
             Name
