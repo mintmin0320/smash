@@ -31,6 +31,7 @@ export default function Mypage() {
             Group
           </TitleBox>
 
+
         </BottomBox>
       </RightBox>
     </Container>

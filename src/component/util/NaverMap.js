@@ -5,6 +5,7 @@ import useMap from './useMap';
 
 const NaverMap = () => {
   useMap();
+
   return (
     <Container id="map">
 

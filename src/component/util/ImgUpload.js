@@ -3,9 +3,15 @@ import React, { useState, useRef } from 'react'
 import styled from 'styled-components';
 
 export default function ImgUpload() {
+  const [state, setState] = useState({
+    aa: '',
+  });
+
   const fileInputRef = useRef(null);
 
   const uploadImage = async (e) => {
+    const url = `/user/user-profile`;
+
     if (e.target.files === null) return;
 
     const file = e.target.files[0];
@@ -14,10 +20,27 @@ export default function ImgUpload() {
     const formData = new FormData();
     formData.append("file", file);
 
+    // /* key 확인하기 */
+    // for (let key of formData.keys()) {
+    //   console.log(key);
+    // }
+
+    // /* value 확인하기 */
+    // for (let value of formData.values()) {
+    //   console.log(value);
+    // }
+
     try {
-      await axios.post(``, formData, {
-        headers: { "Context-Type": "multipart/form-data" }
-      })
+      const res = await axios.post(url, formData, {});
+      console.log(res);
+
+      if (res.status === 200) {
+        alert("이미지 업로드 성공!");
+      }
+      else {
+        alert("이미지 업로드 실패!");
+      }
+
     } catch (error) {
       console.log(error);
     }
@@ -31,7 +54,14 @@ export default function ImgUpload() {
   }
   return (
     <>
-      <input type="file" hidden={true} ref={fileInputRef} onChange={uploadImage}></input>
+      <input
+        type="file"
+        name="myFile"
+        hidden={true}
+        ref={fileInputRef}
+        onChange={uploadImage}
+        accept="image/png, image/jpeg, image/jpg"
+      />
       <ProfileBox>
         <Profile
           onClick={openFileInput}
