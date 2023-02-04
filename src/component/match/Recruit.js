@@ -13,6 +13,8 @@ export default function Recruit(props) {
     userId: '',
     category: '',
     num: '',
+    latitude: '',
+    longitude: '',
   });
 
 
@@ -30,6 +32,14 @@ export default function Recruit(props) {
       ...state,
       category: item,
       num: idx,
+    });
+  };
+
+  const getLocation = (lat, lon) => {
+    setState({
+      ...state,
+      latitude: lat,
+      longitude: lon,
     });
   };
 
@@ -81,6 +91,9 @@ export default function Recruit(props) {
   //     console.log(error);
   //   }
   // };
+
+  console.log(state.latitude)
+
 
   return (
     <Container>
@@ -145,10 +158,10 @@ export default function Recruit(props) {
             희망지역
           </LocationInfo>
           <Location>
-            <NaverMap />
+            <NaverMap getLocation={getLocation} />
             <WriteButtonBox>
               <WriteButton>
-                확인
+                확 {state.latitude}
               </WriteButton>
             </WriteButtonBox>
           </Location>

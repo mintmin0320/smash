@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 function useMap() {
   const mapRef = useRef(null);
   const [myLocation, setMyLocation] = useState('');
+  const [latitude, setLatitude] = useState(''); // 위도
+  const [longitude, setLongitude] = useState(''); // 경도
 
   useEffect(() => {
     // geolocation 이용 현재 위치 확인, 위치 미동의 시 기본 위치로 지정
@@ -17,8 +19,6 @@ function useMap() {
       window.alert('현재 위치를 알 수 없어 기본 위치로 지정합니다.');
       setMyLocation({ latitude: 37.4862618, longitude: 127.1222903 });
     }
-
-
   }, []);
 
   useEffect(() => {
@@ -43,10 +43,11 @@ function useMap() {
 
       naver.maps.Event.addListener(map, 'click', function (e) {
         marker.setPosition(e.latlng);
+        setLatitude(e.latlng._lat);
+        setLongitude(e.latlng._lng);
+        console.log(e.latlng);
       });
     }
-
-
   }, [myLocation]);
 
   return {

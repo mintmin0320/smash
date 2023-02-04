@@ -1,8 +1,10 @@
-import { Fragment } from 'react';
+import { useState } from 'react';
 import Title from '../../component/util/Title'
 import styled from 'styled-components';
 import SignOutBtn from '../../component/util/SignOutBtn'
+import Modal from '../../component/util/Modal';
 import Wallpapers from '../../component/util/Wallpapers';
+import router from "next/router";
 
 export default function Mypage() {
   const [modalOpen, setModalOpen] = useState(true);
