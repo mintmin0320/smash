@@ -142,7 +142,7 @@ const Main = styled.div`
   border: solid 0;
 `
 
-const MypageBox = styled.button`
+const MypageBox = styled.div`
   width: 80%;
   height: 90%;
   display: flex;

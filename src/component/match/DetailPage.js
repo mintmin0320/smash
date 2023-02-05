@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import axios from 'axios';
 import NaverMap from '../util/NaverMap';
+import data from './categoryList';
 
 export default function DetailPage(props) {
   const [state, setState] = useState({
     body: '',
     title: '',
     date: '',
+    category: '',
+    count: '',
+    lat: '',
+    lng: '',
   });
 
   useEffect(() => {
@@ -24,7 +29,11 @@ export default function DetailPage(props) {
           ...state,
           title: res.data.result.title,
           body: res.data.result.body,
+          category: res.data.result.category,
           date: res.data.result.date,
+          count: res.data.result.count,
+          lat: res.data.result.latitude,
+          lng: res.data.result.longitude,
         });
         console.log('페이지 상세조회 성공');
       } else {
@@ -35,12 +44,33 @@ export default function DetailPage(props) {
     }
   };
 
+  const Item = () => {
+    return (
+      <React.Fragment>
+        {
+          data.map((item, idx) => {
+            return (
+              <div key={idx}
+                onClick={() => handleClick(idx, item.title)}
+                value={idx}
+                className={"card" + (item.title === state.category ? " active" : "")}
+              >
+                <CardLogo>{item.icon}</CardLogo>
+                <CardTitle>{item.title}</CardTitle>
+              </div>
+            )
+          })
+        }
+      </React.Fragment>
+    );
+  }
+
   return (
     <Container>
       <TopBox>
         <TitleBox>
           <Title>
-            {state.title}
+            {state.title}  [{state.category}]
           </Title>
         </TitleBox>
         <InfoBox>
@@ -48,7 +78,7 @@ export default function DetailPage(props) {
             <InfoText>작성자</InfoText>
           </Writer>
           <Count>
-            <InfoText>남은인원수/인원수</InfoText>
+            <InfoText>남은인원수/ {state.count}</InfoText>
           </Count>
           <Date>
             <InfoText>{state.date}</InfoText>
@@ -59,7 +89,7 @@ export default function DetailPage(props) {
         <Content>
           <CategoryBox>
             <Category>
-              카테고리
+              <Item />
             </Category>
           </CategoryBox>
           <BodyBox>
@@ -71,7 +101,7 @@ export default function DetailPage(props) {
             희망지역
           </LocationInfo>
           <Location>
-            <NaverMap />
+            <NaverMap lat={state.lat} lng={state.lng} />
           </Location>
         </LocationBox>
       </BottomBox>
@@ -189,6 +219,37 @@ const Category = styled.div`
   height: 70%;
   /* border: solid 1px black; */
   background-color: #F2F2F2;
+  display: flex;
+
+  .card{
+    width: 10%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: solid 1px white;
+    cursor: pointer;
+
+    &.active {
+      background-color: black;
+      color: #fff;
+    }
+  }
+`
+
+const CardLogo = styled.div`
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const CardTitle = styled.div`
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const BodyBox = styled.div`
@@ -226,4 +287,3 @@ const Location = styled.div`
   display: flex;
   justify-content: center;
 `
-

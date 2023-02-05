@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useAuthState } from '../../context/auth';
 import NaverMap from '../util/NaverMap';
 import data from './categoryList';
 
 
-export default function Recruit(props) {
+export default function Recruit() {
+  const { location } = useAuthState();
+  console.log(location);
   const [state, setState] = useState({
     title: '',
     count: '',
@@ -13,11 +16,9 @@ export default function Recruit(props) {
     userId: '',
     category: '',
     num: '',
-    latitude: '',
-    longitude: '',
+    latitude: location._lat,
+    longitude: location._lng,
   });
-
-
 
   const handleInputChange = (e) => {
     setState({
@@ -35,13 +36,34 @@ export default function Recruit(props) {
     });
   };
 
-  const getLocation = (lat, lon) => {
-    setState({
-      ...state,
-      latitude: lat,
-      longitude: lon,
-    });
-    console.log(state.latitude)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setGroupData();
+  }
+
+  const setGroupData = async () => {
+    const url = `/match/recruit`
+    const params = {
+      title: state.title,
+      count: state.count,
+      body: state.body,
+      category: state.category,
+      latitude: location._lat,
+      longitude: location._lng,
+    }
+    console.log(params)
+    try {
+      const res = await axios.post(url, params);
+      console.log(res);
+      if (res.status === 200) {
+        window.location.reload();
+      }
+      else {
+        history.back();
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const Item = () => {
@@ -65,109 +87,80 @@ export default function Recruit(props) {
     );
   }
 
-  // useEffect(() => {
-  //   getPostData();
-  // }, []);
-
-  // const getPostData = async () => {
-  //   const url = `/post/detail/${props.postId}`
-  //   const res = await axios.get(url);
-  //   console.log(res);
-  //   try {
-  //     if (res.status === 200) {
-  //       setState({
-  //         ...state,
-  //         title: res.data.result.title,
-  //         body: res.data.result.body,
-  //         userId: res.data.result.author.userId,
-  //         date: res.data.result.date,
-  //       });
-  //       console.log("게시물 조회 성공");
-  //     }
-  //     else {
-  //       console.log("게시물 조회 실패");
-  //       history.back();
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-
-
   return (
     <Container>
-      <TopBox>
-        <TitleBox>
-          <Title>
-            <Input
-              type="text"
-              value={state.title}
-              name="title"
-              onChange={handleInputChange}
-              maxLength={15}
-              required={true}
-              style={{ background: "#F2F2F2" }}
-            // placeholder="Please enter your search term"
-            // onKeyPress={(e) => { handleEnterPress("pw", e) }}
-            />
-          </Title>
-        </TitleBox>
-        <InfoBox>
-          <Writer>
-            <InfoText></InfoText>
-          </Writer>
-          <Count>
-            <InfoText>
+      <Form onSubmit={handleSubmit}>
+        <TopBox>
+          <TitleBox>
+            <Title>
               <Input
                 type="text"
-                value={state.count}
-                name="count"
+                value={state.title}
+                name="title"
                 onChange={handleInputChange}
-                maxLength={1}
-                placeholder="maximum memver"
+                maxLength={15}
                 required={true}
                 style={{ background: "#F2F2F2" }}
+              // placeholder="Please enter your search term"
+              // onKeyPress={(e) => { handleEnterPress("pw", e) }}
               />
-            </InfoText>
-          </Count>
-          <Date>
-            <InfoText></InfoText>
-          </Date>
-        </InfoBox>
-      </TopBox>
-      <BottomBox>
-        <Content>
-          <CategoryBox>
-            <Category>
-              <Item />
-            </Category>
-          </CategoryBox>
-          <BodyBox>
-            <Textarea
-              type="text"
-              value={state.postBody}
-              name="postBody"
-              onChange={handleInputChange}
-              maxLength={800}
-            />
-          </BodyBox>
-        </Content>
-        <LocationBox >
-          <LocationInfo>
-            희망지역
-          </LocationInfo>
-          <Location>
-            <NaverMap getLocation={getLocation} />
-            <WriteButtonBox>
-              <WriteButton>
-                확 {state.latitude}
-              </WriteButton>
-            </WriteButtonBox>
-          </Location>
-        </LocationBox>
-      </BottomBox>
-
+            </Title>
+          </TitleBox>
+          <InfoBox>
+            <Writer>
+              <InfoText></InfoText>
+            </Writer>
+            <Count>
+              <InfoText>
+                <Input
+                  type="text"
+                  value={state.count}
+                  name="count"
+                  onChange={handleInputChange}
+                  maxLength={1}
+                  placeholder="maximum memver"
+                  required={true}
+                  style={{ background: "#F2F2F2" }}
+                />
+              </InfoText>
+            </Count>
+            <Date>
+              <InfoText></InfoText>
+            </Date>
+          </InfoBox>
+        </TopBox>
+        <BottomBox>
+          <Content>
+            <CategoryBox>
+              <Category>
+                <Item />
+              </Category>
+            </CategoryBox>
+            <BodyBox>
+              <Textarea
+                type="text"
+                value={state.body}
+                name="body"
+                onChange={handleInputChange}
+                maxLength={800}
+              />
+            </BodyBox>
+          </Content>
+          <LocationBox >
+            <LocationInfo>
+              희망지역
+            </LocationInfo>
+            <Location>
+              <NaverMap lat={''} />
+              <WriteBox>
+                <Write>
+                  확인
+                </Write>
+              </WriteBox>
+            </Location>
+          </LocationBox>
+        </BottomBox>
+      </Form>
     </Container >
   );
 };
@@ -176,7 +169,7 @@ const Container = styled.div`
   width: 100%;
   height: 95%;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   background-color: #9bbbd4;
   overflow-y: scroll;
@@ -217,7 +210,6 @@ const Input = styled.input`
   width: 98%;
   height: 100%;
   
-
   &:focus{
     outline: none;
   }
@@ -379,17 +371,21 @@ const CardLogo = styled.div`
 const CardTitle = styled.div`
   width: 100%;
   height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
-const WriteButtonBox = styled.div`
+const WriteBox = styled.div`
   width: 82%;
   height: 70%;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `
 
-const WriteButton = styled.div`
+const Write = styled.button`
   width: 25%;
   height: 30%;
   display: flex;
@@ -398,3 +394,10 @@ const WriteButton = styled.div`
   background-color: #F2F2F2;
 `
 
+const Form = styled.form`
+  width: 98.5%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
