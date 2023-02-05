@@ -1,5 +1,5 @@
 // 모든 컴포넌트에서 호출 가능한 변수 생성
-import { createContext, useContext, useReducer } from 'react'
+import { useState, createContext, useContext, useReducer } from 'react'
 
 const StateContext = createContext({
   user: '',
@@ -33,8 +33,12 @@ const reducer = (state, { type, payload }) => {
 }
 
 export const AuthProvider = ({ children }) => {
+  if (typeof window !== 'undefined') {
+    var userId = localStorage.getItem('userId');
+  }
+
   const [state, defaultDispatch] = useReducer(reducer, {
-    user: '',
+    user: userId,
     authenticated: false,
     loading: true
   });

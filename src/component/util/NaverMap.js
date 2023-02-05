@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import useMap from './useMap';
 
 
-const NaverMap = ({ props }) => {
+const NaverMap = ({ getLocation }) => {
   // useMap();
   const mapRef = useRef(null);
   const [myLocation, setMyLocation] = useState('');
@@ -55,9 +55,7 @@ const NaverMap = ({ props }) => {
     }
   }, [myLocation]);
 
-  const setLocation = () => {
-    props.getLocation(latitude, longitude);
-  }
+
 
   return (
     <Container id="map" />

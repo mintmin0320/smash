@@ -41,6 +41,7 @@ export default function Recruit(props) {
       latitude: lat,
       longitude: lon,
     });
+    console.log(state.latitude)
   };
 
   const Item = () => {
@@ -92,7 +93,6 @@ export default function Recruit(props) {
   //   }
   // };
 
-  console.log(state.latitude)
 
 
   return (

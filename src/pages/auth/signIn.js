@@ -114,7 +114,9 @@ export default function SignIn() {
           pwResult: true,
           pwValidation: true,
         });
-        dispatch('LOGIN', res.data?.user.userId);
+        // dispatch('LOGIN', res.data?.user.userId);
+        localStorage.setItem('userId', res.data.user.userId);
+        dispatch('LOGIN', res.data.user.userId);
       }
       else {
         setState({
