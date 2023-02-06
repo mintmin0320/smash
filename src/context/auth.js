@@ -4,7 +4,8 @@ import { useState, createContext, useContext, useReducer } from 'react'
 const StateContext = createContext({
   user: '',
   authenticated: false,
-  loading: true
+  location: '',
+  loading: true,
 });
 
 const DispatchContext = createContext(null);
@@ -25,7 +26,12 @@ const reducer = (state, { type, payload }) => {
     case 'STOP_LOADING':
       return {
         ...state,
-        loading: false
+        loading: false,
+      }
+    case 'LOCATION':
+      return {
+        ...state,
+        location: payload,
       }
     default:
       throw new Error(`Unkown action type: ${type}`)
@@ -40,7 +46,8 @@ export const AuthProvider = ({ children }) => {
   const [state, defaultDispatch] = useReducer(reducer, {
     user: userId,
     authenticated: false,
-    loading: true
+    loading: true,
+    location: '',
   });
 
   console.log('state', state);

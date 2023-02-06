@@ -9,7 +9,7 @@ import FolderGroup from '../component/util/FolderGroup';
 import Title from '../component/util/Title'
 import SignOutBtn from '../component/util/SignOutBtn'
 import Weather from '../component/util/widget/Weather';
-import Slick from '../component/util/Slick';
+import Slick from '../component/util/widget/Slick';
 import NaverMap from '../component/util/NaverMap';
 
 export default function Home() {
@@ -136,8 +136,7 @@ const RightTop = styled.div`
 
 const Slide = styled.div`
   width: 75%;
-  height: 100%;
-  border: solid 1px black;
+  height: 60%;
 `
 
 const Widget = styled.div`
@@ -151,7 +150,7 @@ const Widget = styled.div`
 const WeatherBox = styled.div`
   width: 100%;
   height: 60%;
-  border: solid 1px black;
+  border-bottom: solid 1px black;
 `
 
 const RightBottom = styled.div`
@@ -160,6 +159,7 @@ const RightBottom = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  /* background-color: #fff; */
 `
 
 const LeftBox = styled.div`

@@ -91,7 +91,6 @@ const SectionBox = styled.div`
   border-radius: 11px 11px 11px 11px;
   //팝업이 열릴때 스르륵 열리는 효과
   animation: modal-show 0.3s;
-
   @media ( max-width: 1500px ) {
     height: 650px;
   }
@@ -142,7 +141,7 @@ const Main = styled.div`
   border: solid 0;
 `
 
-const MypageBox = styled.button`
+const MypageBox = styled.div`
   width: 80%;
   height: 90%;
   display: flex;

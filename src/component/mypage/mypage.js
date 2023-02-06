@@ -1,13 +1,11 @@
 import styled from 'styled-components';
-import { useAuthDispatch } from '../../context/auth';
 import ImgUpload from '../util/ImgUpload';
 import NaverMap from '../util/NaverMap'
 
 
 export default function Mypage() {
-  const dispatch = useAuthDispatch();
 
-  // dispatch("LOGIN", "hamin");
+
   return (
     <Container>
       <LeftBox>

@@ -163,7 +163,7 @@ export default function Match() {
                 </Profile>
                 <ListDetail>
                   <Writer>hamin</Writer>
-                  <Title>{item.title}</Title>
+                  <Title>[ {item.category} ]&nbsp;&nbsp;{item.title}</Title>
                 </ListDetail>
               </List>
             )
@@ -287,22 +287,22 @@ const Content = styled.div`
   display: flex;
   justify-content: flex-end;
   overflow-y: scroll;
-  overflow: hidden;
+  /* overflow: hidden; */
 `
 
 const ListBox = styled.div`
   width: 68%;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   flex-direction: column;
 `
 
 const List = styled.div`
   width: 100%;
-  height: 17%;
+  height: 100px;
   display: flex;
+  /* border-bottom: solid 1px black; */
   cursor: pointer;
-
   &:hover{  
     background-color : skyblue;
   }
@@ -359,7 +359,6 @@ const Input = styled.input`
   width: 98%;
   height: 100%;
   
-
   &:focus{
     outline: none;
   }
@@ -396,14 +395,12 @@ const CategoryList = styled.div`
   border-bottom: solid 1px black;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-
   .card{
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     cursor: pointer;
-
     &.active {
       background-color: black;
       color: #fff;
