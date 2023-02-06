@@ -220,6 +220,7 @@ const Category = styled.div`
   /* border: solid 1px black; */
   background-color: #F2F2F2;
   display: flex;
+
   .card{
     width: 10%;
     height: 100%;
@@ -227,6 +228,7 @@ const Category = styled.div`
     flex-direction: column;
     border: solid 1px white;
     cursor: pointer;
+
     &.active {
       background-color: black;
       color: #fff;
