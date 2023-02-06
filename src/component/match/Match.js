@@ -13,7 +13,7 @@ export default function Match() {
     body: '',
     userId: '',
     comment: '',
-    search: '',
+    keyword: '',
     menu: false,
     detail: false,
     recruit: false,
@@ -54,38 +54,81 @@ export default function Match() {
     getGroupList();
   }, []);
 
-  const getGroupList = async () => {
-    const url = `/match/list`;
-    const res = await axios.get(url);
-    console.log(res);
-    try {
-      if (res.status === 200) {
-        if (res.data.groupList === null) {
-          setState({
-            ...state,
-            groupList: [],
-          });
-          console.log("그룹이 존재하지 않습니다.");
+  const handleClick = (idx, item) => {
+    console.log(idx, item);
+    setState({
+      ...state,
+      category: item,
+      num: idx,
+    });
+    console.log(state.category)
+    getGroupList("classification", item);
+  };
+
+  const getGroupList = async (classification, item) => {
+    console.log(classification);
+    if (classification === undefined) {
+      console.log("5567")
+      const url = `/match/list`;
+      const res = await axios.get(url);
+      console.log(res);
+      try {
+        if (res.status === 200) {
+          if (res.data.groupList === null) {
+            setState({
+              ...state,
+              groupList: [],
+            });
+            console.log("그룹이 존재하지 않습니다.");
+          }
+          else {
+            setState({
+              ...state,
+              groupList: res.data.groupList,
+            });
+            console.log("그룹 목록 조회 성공");
+          }
         }
         else {
-          setState({
-            ...state,
-            groupList: res.data.groupList,
-          });
-          console.log("그룹 목록 조회 성공");
+          console.log("그룹 목록 조회 실패");
+          history.back();
         }
+      } catch (error) {
+        console.log(error);
       }
-      else {
-        console.log("그룹 목록 조회 실패");
-        history.back();
+    } else {
+      console.log(state.category);
+      const url = `/match/classification/${item}`;
+      const res = await axios.get(url);
+      console.log(res);
+      try {
+        if (res.status === 200) {
+          if (res.data.groupList === null) {
+            setState({
+              ...state,
+              groupList: [],
+            });
+            console.log("분류 실패");
+          }
+          else {
+            setState({
+              ...state,
+              groupList: res.data.groupList,
+            });
+            console.log("분류 성공");
+          }
+        }
+        else {
+          alert("분류 실패(error)");
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 
   const handleSearchButton = () => {
-    if (state.search === '') {
+    if (state.keyword === '') {
       alert("Please enter your search term !!");
     } else {
       getSearchTitle();
@@ -93,7 +136,7 @@ export default function Match() {
   }
 
   const getSearchTitle = async () => {
-    const url = `/match/${state.search}`
+    const url = `/match/${state.keyword}`
     console.log(url);
     const res = await axios.get(url);
     console.log(res);
@@ -118,15 +161,6 @@ export default function Match() {
       ...state,
       matchId: id,
       detail: true
-    });
-  };
-
-  const handleClick = (idx, item) => {
-    console.log(idx, item);
-    setState({
-      ...state,
-      category: item,
-      num: idx,
     });
   };
 
@@ -224,8 +258,8 @@ export default function Match() {
         <SearchBox>
           <Input
             type="text"
-            value={state.search}
-            name="search"
+            value={state.keyword}
+            name="keyword"
             onChange={handleInputChange}
             maxLength={15}
           // placeholder="Please enter your search term"
