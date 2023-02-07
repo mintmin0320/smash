@@ -30,6 +30,15 @@ export default function Wallpapers() {
           <MainBox>
             <FolderGroup icon={faFolder} title={"따오기"} />
           </MainBox>
+          <MainBox>
+            <FolderGroup icon={faFolder} title={"따오기"} />
+          </MainBox>
+          <MainBox>
+            <FolderGroup icon={faFolder} title={"따오기"} />
+          </MainBox>
+          <MainBox>
+            <FolderGroup icon={faFolder} title={"따오기"} />
+          </MainBox>
         </MidBox>
       </LeftBox>
       <RighttBox>

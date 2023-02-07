@@ -1,95 +1,94 @@
-// import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
-// import styled from 'styled-components';
-// import { WindyAnimation, SunAnimation } from '../Lottie';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import styled from 'styled-components';
+import { WindyAnimation, SunAnimation, RainAnimation } from '../Lottie';
 
-// export default function Weather() {
-//   const [state, setState] = useState({
-//     high: '',
-//     low: '',
-//     pty: '',
-//   })
+export default function Weather() {
+  const [state, setState] = useState({
+    tmp: '',
+    pty: '',
+  })
 
-//   const getWeatherData = async () => {
-//     const url = `/widget/weather`;
-//     const res = await axios.get(url);
-//     console.log(res);
-//     try {
-//       if (res.status === 200) {
-//         setState({
-//           ...state,
-//           sky: res.data.sky,
-//           high: res.data.high,
-//           low: res.data.low,
-//         });
-//         console.log("날씨 조회 성공!");
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
+  const getWeatherData = async () => {
+    const url = `/widget/weather`;
+    const res = await axios.get(url);
+    console.log(res);
+    try {
+      if (res.status === 200) {
+        setState({
+          ...state,
+          sky: res.data.sky,
+          tmp: res.data.tmp,
+        });
+        console.log("날씨 조회 성공!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-//   useEffect(() => {
-//     getWeatherData();
-//   }, []);
+  useEffect(() => {
+    getWeatherData();
+  }, []);
 
-//   return (
-//     <Container>
-//       <SkyState>
-//         {state.sky === '1' ? <SunAnimation /> : <WindyAnimation />}
-//       </SkyState>
-//       <Temperatures>
-//         <HighBox>
-//           최고&nbsp;
-//           {state.high}
-//         </HighBox>
-//         <LowBox>
-//           최저&nbsp;
-//           {state.low}
-//         </LowBox>
-//       </Temperatures>
-//     </Container>
-//   );
-// };
+  return (
+    <Container>
+      <SkyState>
+        {state.sky === "1" ? <SunAnimation /> : state.sky === "3" ? <WindyAnimation /> : <RainAnimation />}
+      </SkyState>
+      <Temperatures>
+        <HighBox>
+          현재 : &nbsp;
+          {state.tmp}°C
+        </HighBox>
+        <LowBox>
+          하늘 : &nbsp;
+          {state.sky === "1" ? "맑음" : state.sky === "3" ? "구름많음" : "흐림"}
+        </LowBox>
+      </Temperatures>
+    </Container>
+  );
+};
 
-// const Container = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-// `
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+`
 
-// const SkyState = styled.div`
-//   width: 100%;
-//   height: 80%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `
+const SkyState = styled.div`
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
-// const Temperatures = styled.div`
-//   width: 100%;
-//   height: 80%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `
+const Temperatures = styled.div`
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
-// const HighBox = styled.div`
-//   width: 50%;
-//   height: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   color: red;
-// `
+const HighBox = styled.div`
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+`
 
-// const LowBox = styled.div`
-//   width: 50%;
-//   height: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   color: blue;
-// `
+const LowBox = styled.div`
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: blue;
+`

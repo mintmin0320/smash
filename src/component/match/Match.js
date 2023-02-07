@@ -68,7 +68,6 @@ export default function Match() {
   const getGroupList = async (classification, item) => {
     console.log(classification);
     if (classification === undefined) {
-      console.log("5567")
       const url = `/match/list`;
       const res = await axios.get(url);
       console.log(res);
@@ -425,10 +424,15 @@ const MenuBox = styled.div`
 
 const CategoryList = styled.div`
   width: 95%;
-  height: 50%;
-  border-bottom: solid 1px black;
+  height: 50%;  
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+  @media ( max-width: 1500px ) {
+  height: 80%;  
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
   .card{
     width: 100%;
     height: 100%;
@@ -453,14 +457,17 @@ const CardLogo = styled.div`
 const CardTitle = styled.div`
   width: 100%;
   height: 20%;
+  display: flex;
+  justify-content: center;
 `
 
 const ButtonBox = styled.div`
   width: 100%;
-  height: 45%;
+  height: 20%;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
+
 `
 
 const ConfirmButton = styled.div`

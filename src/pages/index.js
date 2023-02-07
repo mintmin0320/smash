@@ -59,6 +59,21 @@ export default function Home() {
               <FolderGroup icon={faFolder} title={"따오기"} />
             </MainBox>
           </MidBox>
+          <MidBox>
+            <MainBox onClick={() => openModal("따오기")}>
+              <FolderGroup icon={faFolder} title={"따오기"} />
+            </MainBox>
+          </MidBox>
+          <MidBox>
+            <MainBox onClick={() => openModal("따오기")}>
+              <FolderGroup icon={faFolder} title={"따오기"} />
+            </MainBox>
+          </MidBox>
+          <MidBox>
+            <MainBox onClick={() => openModal("따오기")}>
+              <FolderGroup icon={faFolder} title={"따오기"} />
+            </MainBox>
+          </MidBox>
         </LeftBox>
         <RighttBox>
           <RightTop>
@@ -67,7 +82,7 @@ export default function Home() {
             </Slide>
             <Widget>
               <WeatherBox>
-                Weather
+                <Weather />
               </WeatherBox>
             </Widget>
           </RightTop>
@@ -150,7 +165,11 @@ const Widget = styled.div`
 const WeatherBox = styled.div`
   width: 100%;
   height: 60%;
-  border-bottom: solid 1px black;
+  /* border-bottom: solid 1px black; */
+
+  @media ( max-width: 1500px ) {
+    height: 81.4%;
+  }
 `
 
 const RightBottom = styled.div`

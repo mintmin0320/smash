@@ -3,6 +3,7 @@ import group from '../../../public/group.json';
 import errLottie from '../../../public/animation404.json';
 import sunnyLottie from '../../../public/sunny.json';
 import windyLottie from '../../../public/windy.json';
+import rainLottie from '../../../public/rain.json';
 
 export function Animation() {
   return (
@@ -48,13 +49,13 @@ export function WindyAnimation() {
   );
 }
 
-// export function RainAnimation() {
-//   return (
-//     <Lottie
-//       loop
-//       animationData={group}
-//       play
-//     >
-//     </Lottie>
-//   );
-// }
+export function RainAnimation() {
+  return (
+    <Lottie
+      loop
+      animationData={rainLottie}
+      play
+    >
+    </Lottie>
+  );
+}
