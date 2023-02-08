@@ -20,6 +20,7 @@ export default function Home() {
     setModalOpen(true);
     setefolderName(id);
   };
+
   const closeModal = () => {
     setModalOpen(false);
   };
@@ -54,26 +55,6 @@ export default function Home() {
               <FolderGroup icon={faFolder} title={"닭"} />
             </MainBox>
           </MidBox>
-          <MidBox>
-            <MainBox onClick={() => openModal("따오기")}>
-              <FolderGroup icon={faFolder} title={"따오기"} />
-            </MainBox>
-          </MidBox>
-          <MidBox>
-            <MainBox onClick={() => openModal("따오기")}>
-              <FolderGroup icon={faFolder} title={"따오기"} />
-            </MainBox>
-          </MidBox>
-          <MidBox>
-            <MainBox onClick={() => openModal("따오기")}>
-              <FolderGroup icon={faFolder} title={"따오기"} />
-            </MainBox>
-          </MidBox>
-          <MidBox>
-            <MainBox onClick={() => openModal("따오기")}>
-              <FolderGroup icon={faFolder} title={"따오기"} />
-            </MainBox>
-          </MidBox>
         </LeftBox>
         <RighttBox>
           <RightTop>
@@ -87,7 +68,17 @@ export default function Home() {
             </Widget>
           </RightTop>
           <RightBottom>
-            미정
+            <CopyrightBox>
+              <Copyright>
+                깃허브
+              </Copyright>
+              <Copyright>
+                이메일
+              </Copyright>
+              <Copyright>
+                Copyright 2017.name. All rights reserved.
+              </Copyright>
+            </CopyrightBox>
           </RightBottom>
         </RighttBox>
       </Content>
@@ -177,7 +168,22 @@ const RightBottom = styled.div`
   height: 25%;
   display: flex;
   justify-content: center;
+  align-items: flex-end;
+  /* background-color: #fff; */
+`
+
+const CopyrightBox = styled.div`
+  width: 100%;
+  height: 30%;
+  display: flex;
+`
+
+const Copyright = styled.div`
+  width: 30%;
+  height: 100%;
+  display: flex;
   align-items: center;
+  justify-content: center;
   /* background-color: #fff; */
 `
 

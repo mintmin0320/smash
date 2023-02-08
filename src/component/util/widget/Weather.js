@@ -50,7 +50,7 @@ export default function Weather() {
   return (
     <Container>
       <SkyState>
-        {state.sky === "1" ? <SunAnimation /> : state.sky === "3" ? <WindyAnimation /> : <RainAnimation />}
+        {state.sky === "1" ? <SunAnimation /> : state.sky === "3" ? <WindyAnimation /> : state.sky === "4" ? <RainAnimation /> : "갱신중"}
       </SkyState>
       <Temperatures>
         <HighBox>
@@ -59,7 +59,7 @@ export default function Weather() {
         </HighBox>
         <LowBox>
           하늘 : &nbsp;
-          {state.sky === "1" ? "맑음" : state.sky === "3" ? "구름많음" : "흐림"}
+          {state.sky === "1" ? "맑음" : state.sky === "3" ? "구름많음" : state.sky === "4" ? "흐림" : "갱신중"}
         </LowBox>
       </Temperatures>
     </Container>
