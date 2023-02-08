@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { useAuthState } from '../../context/auth'
 
 export default function Comment(props) {
-  const { user } = useAuthState();
+  const userId = localStorage.getItem("userId");
   const [state, setState] = useState({
     body: '',
-    userId: '',
+    commentId: '',
     comment: '',
     cmtList: [],
   });
@@ -56,12 +55,33 @@ export default function Comment(props) {
     }
   };
 
+  const handleDeleteButton = async (id) => {
+    const url = `/comment/delete`
+    const res = await axios.delete(url, {
+      data: {
+        commentId: id,
+      }
+    })
+    console.log(res);
+    try {
+      if (res.data.result) {
+        alert("삭제완료!");
+        getCmtData();
+      }
+      else {
+        alert("삭제실패!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleWriteCmt = async () => {
     const url = `/comment/write`
     const params = {
       cmtBody: state.comment,
       postId: props.postId,
-      userId: "hamin"
+      userId,
     }
     const res = await axios.post(url, params);
     console.log(res);
@@ -90,13 +110,20 @@ export default function Comment(props) {
           state.cmtList.map((item, idx) => {
             return (
               <CommentList key={idx}>
+                {userId === item.userId && (
+                  <CommentDelete
+                    onClick={() => handleDeleteButton(item._id)}
+                  >
+                    X
+                  </CommentDelete>
+                )}
                 <CommentId>{item.userId}</CommentId>
                 <CommentBody>{item.body}</CommentBody>
                 <CommentDate>{item.date}</CommentDate>
               </CommentList>
             )
           })
-        };
+        }
       </React.Fragment>
     );
   };
@@ -143,6 +170,7 @@ const WriteButton = styled.div`
   background-color: #F2F2F2;
   cursor: pointer;
 `
+
 // 검색창
 const Textarea = styled.textarea`
   font-size: 22px;
@@ -162,6 +190,16 @@ const Textarea = styled.textarea`
   }
 `
 
+const CommentDelete = styled.div`
+  width: 5%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: grey;
+  cursor: pointer;
+`
+
 const CommentList = styled.div`
   width: 100%;
   height: 80px;
@@ -170,7 +208,7 @@ const CommentList = styled.div`
 `
 
 const CommentId = styled.div`
-  width: 25%;
+  width: 23%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -178,7 +216,7 @@ const CommentId = styled.div`
 `
 
 const CommentBody = styled.div`
-  width: 60%;
+  width: 62%;
   height: 100%;
   display: flex;
   align-items: center;

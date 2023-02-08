@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { useAuthState } from '../../context/auth'
 import Comment from './Comment';
 
 export default function Post(props) {
-  const { user } = useAuthState();
+  const userId = localStorage.getItem("userId");
   const [state, setState] = useState({
     title: '',
     body: '',
-    userId: '',
+    postId: '',
     date: '',
   });
 
@@ -27,7 +26,7 @@ export default function Post(props) {
           ...state,
           title: res.data.result.title,
           body: res.data.result.body,
-          userId: res.data.result.author.userId,
+          postId: res.data.result.author.userId,
           date: res.data.result.date,
         });
         console.log("게시물 조회 성공");
@@ -35,6 +34,27 @@ export default function Post(props) {
       else {
         console.log("게시물 조회 실패");
         history.back();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDeleteButton = async () => {
+    const url = `/post/delete`
+    const res = await axios.delete(url, {
+      data: {
+        postId: state.postId,
+      }
+    })
+    console.log(res);
+    try {
+      if (res.data.result) {
+        alert("삭제완료!");
+        window.location.reload();
+      }
+      else {
+        alert("삭제실패!");
       }
     } catch (error) {
       console.log(error);
@@ -53,7 +73,7 @@ export default function Post(props) {
       <BottomBox>
         <Content>
           <AuthorBox>
-            작성자 : {state.userId}&nbsp;&nbsp;&nbsp;{state.date}
+            작성자 : {state.postId}&nbsp;&nbsp;&nbsp;{state.date}
           </AuthorBox>
           <BodyBox>
             {state.body}
@@ -62,8 +82,8 @@ export default function Post(props) {
             <ListButton onClick={handleRefreshButton}>
               목록
             </ListButton>
-            {state.userId === user && (
-              <ListButton>
+            {state.postId === userId && (
+              <ListButton onClick={handleDeleteButton}>
                 삭제
               </ListButton>
             )}

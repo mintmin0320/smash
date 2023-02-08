@@ -51,7 +51,6 @@ export default function DetailPage(props) {
           data.map((item, idx) => {
             return (
               <div key={idx}
-                onClick={() => handleClick(idx, item.title)}
                 value={idx}
                 className={"card" + (item.title === state.category ? " active" : "")}
               >

@@ -3,10 +3,10 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 export default function WritePost() {
+  const userId = localStorage.getItem("userId");
   const [state, setState] = useState({
     postTitle: '',
     postBody: '',
-    userId: '',
   });
 
   const handleInputChange = (e) => {
@@ -21,7 +21,7 @@ export default function WritePost() {
     const params = {
       postTitle: state.postTitle,
       postBody: state.postBody,
-      userId: 'hamin'
+      userId,
     };
     const res = await axios.post(url, params);
     console.log(res);

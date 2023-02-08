@@ -158,6 +158,10 @@ const TopBox = styled.div`
   height: 7%;
   display: flex;
   border-bottom: solid 3px #F2F2F2;
+
+  @media ( max-width: 1500px ) {
+    height: 10%;
+  }
 `
 // 검색 - 프로필
 const ProfilBox = styled.div`
@@ -226,6 +230,10 @@ const BottomBox = styled.div`
   place-items: center;
   /* overflow: hidden;  */
   padding-top: 20px;
+
+  @media ( max-width: 1500px ) {
+    height: 90%;
+  }
 `
 // 게시물
 const PostBox = styled.div`

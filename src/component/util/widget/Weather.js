@@ -4,10 +4,25 @@ import styled from 'styled-components';
 import { WindyAnimation, SunAnimation, RainAnimation } from '../Lottie';
 
 export default function Weather() {
+  const [myLocation, setMyLocation] = useState('');
   const [state, setState] = useState({
     tmp: '',
     pty: '',
-  })
+  });
+
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setMyLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      });
+    } else {
+      window.alert('현재 위치를 알 수 없어 기본 위치로 지정합니다.');
+      setMyLocation({ latitude: 37.4862618, longitude: 127.1222903 });
+    }
+  }
 
   const getWeatherData = async () => {
     const url = `/widget/weather`;
@@ -28,6 +43,7 @@ export default function Weather() {
   }
 
   useEffect(() => {
+    // getLocation();
     getWeatherData();
   }, []);
 
