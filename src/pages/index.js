@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faFolder, faComments, faUsersRays } from "@fortawesome/free-solid-svg-icons";
+import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import Link from 'next/link';
 import Router from "next/router";
 import axios from 'axios';
@@ -32,9 +34,11 @@ export default function Home() {
       <Content>
         <LeftBox>
           <MidBox>
-            <MainBox onClick={() => openModal("마이페이지")}>
-              <FolderGroup icon={faUser} title={"마이페이지"} />
-            </MainBox>
+            <Link href="/mypage" legacyBehavior>
+              <MainBox>
+                <FolderGroup icon={faUser} title={"마이페이지"} />
+              </MainBox>
+            </Link>
           </MidBox>
           <MidBox>
             <Link href="/community" legacyBehavior>
@@ -56,7 +60,7 @@ export default function Home() {
             </MainBox>
           </MidBox>
         </LeftBox>
-        <RighttBox>
+        <RightBox>
           <RightTop>
             <Slide>
               <Slick />
@@ -69,18 +73,24 @@ export default function Home() {
           </RightTop>
           <RightBottom>
             <CopyrightBox>
+              <Link href="https://github.com/mintmin0320/smash" legacyBehavior>
+                <Copyright cusor={"cusor"}>
+                  <FontAwesomeIcon icon={faGithub} size="2x" />
+                  &nbsp;
+                  SMASH
+                </Copyright>
+              </Link>
               <Copyright>
-                깃허브
+                <FontAwesomeIcon icon={faGoogle} size="2x" />
+                &nbsp;
+                mintmin0320@gmail.com
               </Copyright>
               <Copyright>
-                이메일
-              </Copyright>
-              <Copyright>
-                Copyright 2017.name. All rights reserved.
+                Copyright 2023.mintmin. All rights reserved.
               </Copyright>
             </CopyrightBox>
           </RightBottom>
-        </RighttBox>
+        </RightBox>
       </Content>
       <SignOutBtn />
     </Container>
@@ -111,7 +121,6 @@ export default function Home() {
 const Container = styled.div`
   width: 100%;
   height: 100vh;
-  justify-content: center;
   background-color: #F9F2F8;
 `
 
@@ -122,13 +131,14 @@ const Content = styled.div`
 `
 // 폴더 
 
-const RighttBox = styled.div`
+const RightBox = styled.div`
   width: 80%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* background-color: rebeccapurple; */
   
 `
 
@@ -184,6 +194,8 @@ const Copyright = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  /* border: solid 1px black; */
+  cursor: ${(props => (props.cusor === "cusor" ? "pointer" : ""))};
   /* background-color: #fff; */
 `
 

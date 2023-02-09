@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 import ImgUpload from '../util/ImgUpload';
-import NaverMap from '../util/NaverMap'
-
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function Mypage() {
-
-
   return (
     <Container>
       <LeftBox>
@@ -25,7 +23,6 @@ export default function Mypage() {
       </LeftBox>
       <RightBox>
         <TopBox>
-
 
         </TopBox>
         <BottomBox>

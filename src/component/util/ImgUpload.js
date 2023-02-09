@@ -1,17 +1,20 @@
 import axios from 'axios';
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components';
 
 export default function ImgUpload() {
+  if (typeof window !== 'undefined') {
+    var userId = localStorage.getItem("userId");
+  }
+
   const [state, setState] = useState({
-    aa: '',
+    fileName: '',
   });
 
   const fileInputRef = useRef(null);
 
   const uploadImage = async (e) => {
-    const url = `/user/user-profile`;
-
+    const url = `/user/profile-upload/${userId}`;
     if (e.target.files === null) return;
 
     const file = e.target.files[0];
@@ -31,11 +34,12 @@ export default function ImgUpload() {
     // }
 
     try {
-      const res = await axios.post(url, formData, {});
+      const res = await axios.post(url, formData);
       console.log(res);
 
       if (res.status === 200) {
-        alert("이미지 업로드 성공!");
+        console.log("이미지 업로드 성공!");
+        window.location.reload();
       }
       else {
         alert("이미지 업로드 실패!");
@@ -52,6 +56,24 @@ export default function ImgUpload() {
       fileInput.click();
     }
   }
+
+  const getProfileData = async () => {
+    const url = `/user/profile-download/${userId}`
+    const res = await axios.post(url);
+    console.log(res);
+    try {
+      setState({
+        ...state,
+        fileName: res.data.user.fileName,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getProfileData();
+  }, [])
   return (
     <>
       <input
@@ -65,7 +87,8 @@ export default function ImgUpload() {
       <ProfileBox>
         <Profile
           onClick={openFileInput}
-        />
+          src={`http://localhost:8080/images/${state.fileName}`}
+        ></Profile>
       </ProfileBox>
     </>
   )
@@ -79,10 +102,11 @@ const ProfileBox = styled.div`
   align-items: center;
 `
 
-const Profile = styled.div`
+const Profile = styled.img`
   width: 70%;
   height: 80%;
   border-radius: 50%;
-  border: solid 2px #D8D8D8;
+  cursor: pointer;
+  /* object-fit: fill; */
+  /* border: solid 2px #D8D8D8; */
 `
-
