@@ -13,6 +13,7 @@ export default function Community() {
     post: false,
     postId: '',
     postList: [],
+    fileName: '',
   });
 
   const handleInputChange = (e) => {
@@ -30,6 +31,7 @@ export default function Community() {
       setState({
         ...state,
         postList: res.data.postList,
+        fileName: res.data.postList.author.fileName,
         write: false,
         post: false,
       });
@@ -107,11 +109,11 @@ export default function Community() {
     <Container>
       <TopBox>
         <ProfilBox>
-          <ProfilImg>
-            <Profil>
-              <FontAwesomeIcon icon={faUser} size="2x" />
-            </Profil>
-          </ProfilImg>
+          {/* <ProfilImg>
+            <Profil
+              src={`http://localhost:8080/images/${state.fileName}`}
+            />
+          </ProfilImg> */}
         </ProfilBox>
         <SearchBox>
           <Input
@@ -178,7 +180,7 @@ const ProfilImg = styled.div`
   justify-content: center;
 `
 
-const Profil = styled.div`
+const Profil = styled.img`
   width: 30%;
   height: 75%;
   display: flex;

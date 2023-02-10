@@ -192,10 +192,12 @@ export default function Match() {
             return (
               <List key={idx} onClick={() => handleDetailView(item._id)}>
                 <Profile>
-                  <ProfileImg />
+                  <ProfileImg
+                    src={`http://localhost:8080/images/${item.author.fileName}`}
+                  />
                 </Profile>
                 <ListDetail>
-                  <Writer>hamin</Writer>
+                  <Writer>{item.author.userId}</Writer>
                   <Title>[ {item.category} ]&nbsp;&nbsp;{item.title}</Title>
                 </ListDetail>
               </List>
@@ -339,22 +341,30 @@ const List = styled.div`
   &:hover{  
     background-color : skyblue;
   }
+
+  /* @media ( max-width: 1500px ) {
+    height: 10px;
+  } */
 `
 
 const Profile = styled.div`
   width: 10%;
-  height: 60%;
+  height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  
 `
 
-const ProfileImg = styled.div`
+const ProfileImg = styled.img`
   width: 70%;
   height: 70%;
   border-radius: 50%;
   background-color: white;
+
+  @media ( max-width: 1500px ) {
+    height: 80%;
+    width: 80%;
+  }
 `
 
 const ListDetail = styled.div`  

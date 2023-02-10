@@ -7,6 +7,9 @@ import data from './categoryList';
 
 
 export default function Recruit() {
+  if (typeof window !== 'undefined') {
+    var userId = localStorage.getItem("userId");
+  }
   const { location } = useAuthState();
   console.log(location);
   const [state, setState] = useState({
@@ -50,6 +53,7 @@ export default function Recruit() {
       category: state.category,
       latitude: location._lat,
       longitude: location._lng,
+      userId
     }
     console.log(params)
     try {
