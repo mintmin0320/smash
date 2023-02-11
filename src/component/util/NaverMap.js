@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuthDispatch } from '../../context/auth';
 import styled from 'styled-components';
+import coffeData from './coffe.json'
 
 
 const NaverMap = (props) => {
-  console.log(props)
+  console.log(coffeData.coffe[0]);
+  console.log(props);
   const dispatch = useAuthDispatch();
   const mapRef = useRef(null);
   const [myLocation, setMyLocation] = useState('');
@@ -18,7 +20,6 @@ const NaverMap = (props) => {
     }, []);
 
     useEffect(() => {
-      console.log(myLocation.latitude)
       if (typeof myLocation !== 'string') {
 
         // Naver Map 생성
@@ -68,10 +69,13 @@ const NaverMap = (props) => {
           center: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
         });
 
-        var marker = new naver.maps.Marker({
-          position: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
-          map: map
-        });
+        for (let i = 0; i < coffeData.coffe.length; i++) {
+          var marker = new naver.maps.Marker({
+            position: new naver.maps.LatLng(coffeData.coffe[i].Latitude, coffeData.coffe[i].Longitude),
+            map: map
+          });
+        }
+
 
         naver.maps.Event.addListener(map, 'click', function (e) {
           marker.setPosition(e.latlng);
