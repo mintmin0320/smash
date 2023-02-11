@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faFolder, faComments, faUsersRays } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faFolder, faComments, faUsersRays, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import Link from 'next/link';
 import Router from "next/router";
@@ -15,8 +15,35 @@ import Slick from '../component/util/widget/Slick';
 import NaverMap from '../component/util/NaverMap';
 
 export default function Home() {
+  const now = new Date();
+  let month = now.getMonth() + 1;
+  month = month >= 10 ? month : month;
+  const date = now.getDate();
+  const day = now.getDay();
+  const dayList = ['일', '월', '화', '수', '목', '금', '토'];
+  let hour = now.getHours();
+  const meridiem = hour <= 12 ? '오전' : '오후';
+  hour = hour <= 12 ? hour : hour - 12;
+
+
   const [modalOpen, setModalOpen] = useState(false);
   const [folderName, setefolderName] = useState("");
+  const [nowMinutes, setMinutes] = useState('');
+
+  // useEffect(() => {
+  //   const timeId = setInterval(() => {
+  //     const now = new Date();
+  //     let minutes = now.getMinutes();
+  //     minutes = minutes < 10 ? '0' + minutes : minutes;
+  //     setMinutes(minutes);
+  //     console.log(nowMinutes)
+  //   }, 50000)
+
+  //   return () => {
+  //     clearInterval(timeId)
+  //     console.log("hi")
+  //   }
+  // }, [nowMinutes])
 
   const openModal = (id) => {
     setModalOpen(true);
@@ -31,6 +58,17 @@ export default function Home() {
     <Container>
       <Title title="Home" />
       <Modal open={modalOpen} close={closeModal} header={folderName} />
+      <TopMenu>
+        <ToolMenu>
+          <FontAwesomeIcon icon={faPowerOff} />
+
+        </ToolMenu>
+        <CenterMenu />
+        <WidgetMenu>
+          {month}월 {date}일 ({dayList[day]}) {meridiem} {hour}:{nowMinutes}
+        </WidgetMenu>
+
+      </TopMenu>
       <Content>
         <LeftBox>
           <MidBox>
@@ -92,7 +130,6 @@ export default function Home() {
           </RightBottom>
         </RightBox>
       </Content>
-      <SignOutBtn />
     </Container>
   );
 };
@@ -121,13 +158,50 @@ export default function Home() {
 const Container = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: #F9F2F8;
+  background-color: #EFFBFB;
+`
+
+const TopMenu = styled.div`
+  width: 100%;
+  height: 3%;
+  display: flex;
+  background-color: #E0F2F7;
+
+  @media ( max-width: 1500px ) {
+    height: 4%;
+  }
+`
+
+const ToolMenu = styled.div`
+  width: 4%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const CenterMenu = styled.div`
+  width: 71%;
+  height: 100%;
+  display: flex;
+`
+
+const WidgetMenu = styled.div`
+  width: 24%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 `
 
 const Content = styled.div`
   width: 100%;
-  height: 100%;
+  height: 97%;
   display: flex;
+
+  @media ( max-width: 1500px ) {
+    height: 96%;
+  }
 `
 // 폴더 
 
