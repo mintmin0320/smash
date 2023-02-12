@@ -5,10 +5,12 @@ import coffeData from './coffe.json'
 
 
 const NaverMap = (props) => {
-  console.log(coffeData.coffe[0]);
+  var markers = [];
   console.log(props);
   const dispatch = useAuthDispatch();
   const mapRef = useRef(null);
+  const markerRef = useRef(null);
+  const selectedMarker = useRef(null);
   const [myLocation, setMyLocation] = useState('');
 
   if (props.lat !== '') {
@@ -42,49 +44,64 @@ const NaverMap = (props) => {
     useEffect(() => {
       // geolocation 이용 현재 위치 확인, 위치 미동의 시 기본 위치로 지정
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
+        navigator.geolocation.getCurrentPosition(success, error);
+
+        // 위치추적에 성공했을때 위치 값
+        function success(position) {
           setMyLocation({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
           });
-        });
-      } else {
-        window.alert('현재 위치를 알 수 없어 기본 위치로 지정합니다.');
-        setMyLocation({ latitude: 37.4862618, longitude: 127.1222903 });
+        }
+
+        // 위치 추적에 실패 했을때 초기값
+        function error() {
+          setMyLocation({ latitude: 37.4979517, longitude: 127.0276188 });
+        }
       }
     }, []);
 
     useEffect(() => {
       if (typeof myLocation !== 'string') {
-        // 현재 위치 추적
-        let currentPosition = [myLocation.latitude, myLocation.longitude];
-
-        // Naver Map 생성
         mapRef.current = new naver.maps.Map('map', {
-          center: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
+          center: new naver.maps.LatLng(myLocation.latitude, myLocation.longitude),
           zoomControl: true,
         });
-
-        var map = new naver.maps.Map('map', {
-          center: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
-        });
-
-        for (let i = 0; i < coffeData.coffe.length; i++) {
-          var marker = new naver.maps.Marker({
-            position: new naver.maps.LatLng(coffeData.coffe[i].Latitude, coffeData.coffe[i].Longitude),
-            map: map
+        coffeData.coffe.map((item) => {
+          var infowindows = [];
+          markerRef.current = new naver.maps.Marker({
+            position: new naver.maps.LatLng(item.Latitude, item.Longitude),
+            map: mapRef.current,
           });
-        }
 
+          infowindows.push(new naver.maps.InfoWindow({
+            content: [
+              '<div class="iw_inner">',
+              '   <h3>주역이네 집</h3>',
+              '</div>'
+            ].join('')
+          }));
 
-        naver.maps.Event.addListener(map, 'click', function (e) {
-          marker.setPosition(e.latlng);
-          console.log(e.latlng);
-          dispatch('LOCATION', e.latlng);
+          for (let i = 0; i < mapRef.current.length; i++) {
+            naver.maps.Event.addListener(mapRef.current[i], "click", function (e) {
+              if (infowindows[i].getMap()) {
+                infowindows[i].close();
+              } else {
+                infowindows[i].open(map, mapRef.current[i]);
+              }
+            });
+          }
+
+          // infowindows.open(map, markerRef.current[0]);
         });
+
 
       }
-    }, [myLocation]);
+    }, [mapRef, myLocation]);
+
+
+
+
   }
 
   return (
