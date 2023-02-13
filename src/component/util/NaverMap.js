@@ -68,32 +68,42 @@ const NaverMap = (props) => {
           zoomControl: true,
         });
         coffeData.coffe.map((item) => {
-          var infowindows = [];
           markerRef.current = new naver.maps.Marker({
             position: new naver.maps.LatLng(item.Latitude, item.Longitude),
             map: mapRef.current,
           });
-
-          infowindows.push(new naver.maps.InfoWindow({
-            content: [
-              '<div class="iw_inner">',
-              '   <h3>주역이네 집</h3>',
-              '</div>'
-            ].join('')
-          }));
-
-          for (let i = 0; i < mapRef.current.length; i++) {
-            naver.maps.Event.addListener(mapRef.current[i], "click", function (e) {
-              if (infowindows[i].getMap()) {
-                infowindows[i].close();
-              } else {
-                infowindows[i].open(map, mapRef.current[i]);
-              }
-            });
-          }
-
-          // infowindows.open(map, markerRef.current[0]);
         });
+
+
+
+
+        naver.maps.Event.addListener(mapRef.current, 'click', function (e) {
+          markerRef.current = new naver.maps.Marker({
+            position: new naver.maps.LatLng(e.latlng._lat, e.latlng._lng),
+            map: mapRef.current,
+          });
+
+          console.log(e.latlng);
+        });
+
+        var contentString = [
+          '<div class="iw_inner">',
+          '   <h3>서울특별시청</h3>',
+          '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br>',
+          '       <img src="./img/hi-seoul.jpg" width="55" height="55" alt="서울시청" class="thumb" /><br>',
+          '       02-120 | 공공,사회기관 > 특별,광역시청<br>',
+          '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
+          '   </p>',
+          '</div>'
+        ].join('');
+
+
+        var infowindow = new naver.maps.InfoWindow({
+          content: contentString
+        });
+
+        infowindow.open(mapRef.current, markerRef.current);
+
 
 
       }

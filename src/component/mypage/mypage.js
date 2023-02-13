@@ -4,6 +4,33 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 export default function Mypage() {
+  const [state, setState] = useState({
+    name: '',
+
+  });
+  if (typeof window !== 'undefined') {
+    var userId = localStorage.getItem("userId");
+  }
+
+  const getProfileData = async () => {
+    const url = `/user/profile-download/${userId}`
+    const res = await axios.post(url);
+    console.log(res);
+    try {
+      setState({
+        ...state,
+        name: res.data.user.fileName,
+
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    // getProfileData
+  })
+
   return (
     <Container>
       <LeftBox>
@@ -14,10 +41,10 @@ export default function Mypage() {
             Name
           </NameBox>
           <IdBox>
-            Id
+            {userId}
           </IdBox>
           <LocationBox>
-            거주지
+            {/* 거주지 */}
           </LocationBox>
         </InfoBox>
       </LeftBox>
