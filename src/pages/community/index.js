@@ -6,6 +6,7 @@ import Modal from '../../component/util/Modal';
 import Title from '../../component/util/Title'
 import SignOutBtn from '../../component/util/SignOutBtn'
 import Wallpapers from '../../component/util/Wallpapers';
+import MenuTools from '../../component/util/MenuTools';
 
 export default function Community() {
   const [modalOpen, setModalOpen] = useState(true);
@@ -17,6 +18,7 @@ export default function Community() {
   return (
     <Container>
       <Title title="community" />
+      <MenuTools />
       <Modal open={modalOpen} close={closeModal} header={"커뮤니티"} />
       <Wallpapers />
       <SignOutBtn />

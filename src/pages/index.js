@@ -13,6 +13,7 @@ import SignOutBtn from '../component/util/SignOutBtn'
 import Weather from '../component/util/widget/Weather';
 import Slick from '../component/util/widget/Slick';
 import NaverMap from '../component/util/NaverMap';
+import MenuTools from '../component/util/MenuTools';
 
 export default function Home() {
   const now = new Date();
@@ -59,14 +60,7 @@ export default function Home() {
       <Title title="Home" />
       <Modal open={modalOpen} close={closeModal} header={folderName} />
       <TopMenu>
-        <ToolMenu>
-          <FontAwesomeIcon icon={faPowerOff} />
-
-        </ToolMenu>
-        <CenterMenu />
-        <WidgetMenu>
-          {month}월 {date}일 ({dayList[day]}) {meridiem} {hour}:{nowMinutes}
-        </WidgetMenu>
+        <MenuTools />
 
       </TopMenu>
       <Content>

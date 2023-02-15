@@ -10,7 +10,8 @@ export default function DetailPage(props) {
     title: '',
     date: '',
     category: '',
-    count: '',
+    maxCount: '',
+    count: 0,
     lat: '',
     lng: '',
   });
@@ -31,13 +32,40 @@ export default function DetailPage(props) {
           body: res.data.result.body,
           category: res.data.result.category,
           date: res.data.result.date,
-          count: res.data.result.count,
+          maxCount: String(res.data.result.max_count),
+          count: String(res.data.result.count),
           lat: res.data.result.latitude,
           lng: res.data.result.longitude,
         });
         console.log('페이지 상세조회 성공');
       } else {
         console.log('페이지 상세조회 실패');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getJoinGroup = async () => {
+    const url = `/match/detail/${props.matchId}`;
+    const res = await axios.get(url);
+    console.log(res);
+    try {
+      if (res.status === 200) {
+        setState({
+          ...state,
+          title: res.data.result.title,
+          body: res.data.result.body,
+          category: res.data.result.category,
+          date: res.data.result.date,
+          maxCount: String(res.data.result.max_count),
+          count: String(res.data.result.count),
+          lat: res.data.result.latitude,
+          lng: res.data.result.longitude,
+        });
+        console.log('스터디 가입 성공');
+      } else {
+        console.log('스터디 가입 실패');
       }
     } catch (error) {
       console.log(error);
@@ -77,7 +105,7 @@ export default function DetailPage(props) {
             <InfoText>작성자</InfoText>
           </Writer>
           <Count>
-            <InfoText>남은인원수/ {state.count}</InfoText>
+            <InfoText>{state.count} / {state.maxCount}</InfoText>
           </Count>
           <Date>
             <InfoText>{state.date}</InfoText>
@@ -101,6 +129,11 @@ export default function DetailPage(props) {
           </LocationInfo>
           <Location>
             <NaverMap lat={state.lat} lng={state.lng} />
+            <WriteBox>
+              <Write>
+                신청
+              </Write>
+            </WriteBox>
           </Location>
         </LocationBox>
       </BottomBox>
@@ -284,5 +317,24 @@ const Location = styled.div`
   height: 500px;
   background-color: #fff;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const WriteBox = styled.div`
+  width: 82%;
+  height: 70%;
+  display: flex;
   justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`
+
+const Write = styled.button`
+  width: 25%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F2F2F2;
 `

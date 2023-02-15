@@ -4,6 +4,7 @@ import { faUser, faFolder, faComments, faUsersRays, faPowerOff } from "@fortawes
 import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import styled from 'styled-components';
 import FolderGroup from './FolderGroup';
+import MenuTools from './MenuTools';
 
 export default function Wallpapers() {
   const now = new Date();
@@ -21,13 +22,8 @@ export default function Wallpapers() {
   return (
     <Container>
       <TopMenu>
-        <ToolMenu>
-          <FontAwesomeIcon icon={faPowerOff} />
-        </ToolMenu>
-        <CenterMenu />
-        <WidgetMenu>
-          {month}월 {date}일 ({dayList[day]}) {meridiem} {hour}:{minutes}
-        </WidgetMenu>
+
+        <MenuTools />
       </TopMenu>
       <Content>
         <LeftBox>
