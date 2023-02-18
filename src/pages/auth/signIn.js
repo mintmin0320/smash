@@ -240,7 +240,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #F8EFFB;
+  background-color: #E0F2F7;
 `
 
 const Wrap = styled.div`
@@ -254,6 +254,10 @@ const Wrap = styled.div`
   overflow: hidden;
   background: black;
   box-shadow: 10px 10px 15px rgb(0,0,0,0.5);
+
+  @media ( max-width: 1500px ) {
+    width: 60%;
+  }
 `
 
 const Content = styled.div`

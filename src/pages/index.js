@@ -166,28 +166,6 @@ const TopMenu = styled.div`
   }
 `
 
-const ToolMenu = styled.div`
-  width: 4%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
-const CenterMenu = styled.div`
-  width: 71%;
-  height: 100%;
-  display: flex;
-`
-
-const WidgetMenu = styled.div`
-  width: 24%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-`
-
 const Content = styled.div`
   width: 100%;
   height: 97%;

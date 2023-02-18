@@ -47,29 +47,33 @@ export default function DetailPage(props) {
   };
 
   const getJoinGroup = async () => {
-    const url = `/match/detail/${props.matchId}`;
-    const res = await axios.get(url);
-    console.log(res);
-    try {
-      if (res.status === 200) {
-        setState({
-          ...state,
-          title: res.data.result.title,
-          body: res.data.result.body,
-          category: res.data.result.category,
-          date: res.data.result.date,
-          maxCount: String(res.data.result.max_count),
-          count: String(res.data.result.count),
-          lat: res.data.result.latitude,
-          lng: res.data.result.longitude,
-        });
-        console.log('스터디 가입 성공');
-      } else {
-        console.log('스터디 가입 실패');
-      }
-    } catch (error) {
-      console.log(error);
+    const url = `/match/join`;
+    const params = {
+      matchId: props.matchId,
+      count: 1
     }
+    const res = await axios.post(url, params);
+    console.log(res);
+    // try {
+    //   if (res.status === 200) {
+    //     setState({
+    //       ...state,
+    //       title: res.data.result.title,
+    //       body: res.data.result.body,
+    //       category: res.data.result.category,
+    //       date: res.data.result.date,
+    //       maxCount: String(res.data.result.max_count),
+    //       count: String(res.data.result.count),
+    //       lat: res.data.result.latitude,
+    //       lng: res.data.result.longitude,
+    //     });
+    //     console.log('스터디 가입 성공');
+    //   } else {
+    //     console.log('스터디 가입 실패');
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const Item = () => {
@@ -130,7 +134,7 @@ export default function DetailPage(props) {
           <Location>
             <NaverMap lat={state.lat} lng={state.lng} />
             <WriteBox>
-              <Write>
+              <Write onClick={getJoinGroup}>
                 신청
               </Write>
             </WriteBox>
