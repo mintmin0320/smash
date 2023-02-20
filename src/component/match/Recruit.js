@@ -15,6 +15,7 @@ export default function Recruit() {
   const [state, setState] = useState({
     title: '',
     count: '',
+    maxCount: '',
     body: '',
     userId: '',
     category: '',
@@ -48,7 +49,7 @@ export default function Recruit() {
     const url = `/match/recruit`
     const params = {
       title: state.title,
-      count: state.count,
+      maxCount: state.maxCount,
       body: state.body,
       category: state.category,
       latitude: location._lat,
@@ -118,8 +119,8 @@ export default function Recruit() {
               <InfoText>
                 <Input
                   type="text"
-                  value={state.count}
-                  name="count"
+                  value={state.maxCount}
+                  name="maxCount"
                   onChange={handleInputChange}
                   maxLength={1}
                   placeholder="maximum memver"

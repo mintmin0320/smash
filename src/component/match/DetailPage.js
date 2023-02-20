@@ -5,6 +5,7 @@ import NaverMap from '../util/NaverMap';
 import data from './categoryList';
 
 export default function DetailPage(props) {
+  const userId = localStorage.getItem("userId");
   const [state, setState] = useState({
     body: '',
     title: '',
@@ -50,7 +51,7 @@ export default function DetailPage(props) {
     const url = `/match/join`;
     const params = {
       matchId: props.matchId,
-      count: 1
+      userId,
     }
     const res = await axios.post(url, params);
     console.log(res);
