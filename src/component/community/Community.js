@@ -31,7 +31,6 @@ export default function Community() {
       setState({
         ...state,
         postList: res.data.postList,
-        fileName: res.data.postList.author.fileName,
         write: false,
         post: false,
       });
@@ -93,7 +92,7 @@ export default function Community() {
           state.postList.map((item, idx) => {
             return (
               <PostBox key={idx} onClick={() => handleViewPost(item._id)}>
-                <PostWriter>{item.author.userId}</PostWriter>
+                <PostWriter>{item.userId}</PostWriter>
                 <PostTitle>{item.title}</PostTitle>
                 <PostContent>{item.body}</PostContent>
                 <PostDate>{item.date}</PostDate>
@@ -228,7 +227,7 @@ const BottomBox = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-row-gap: 65px;
-  align-items: center;
+  align-content: start;
   place-items: center;
   /* overflow: hidden;  */
   padding-top: 20px;

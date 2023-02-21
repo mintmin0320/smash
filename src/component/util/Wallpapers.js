@@ -22,7 +22,6 @@ export default function Wallpapers() {
   return (
     <Container>
       <TopMenu>
-
         <MenuTools />
       </TopMenu>
       <Content>

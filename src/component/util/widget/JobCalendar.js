@@ -10,7 +10,7 @@ export default function JobCalendar() {
         id="pageFrame"
         name="pageFrame"
         src="http://www.jobkorea.co.kr/Starter/calendar/sub/week"
-        frameborder="0"
+
         width="99%"
         height="100%"
         className='job'

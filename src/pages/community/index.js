@@ -18,7 +18,6 @@ export default function Community() {
   return (
     <Container>
       <Title title="community" />
-      <MenuTools />
       <Modal open={modalOpen} close={closeModal} header={"커뮤니티"} />
       <Wallpapers />
       <SignOutBtn />
