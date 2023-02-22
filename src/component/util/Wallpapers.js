@@ -1,6 +1,6 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faFolder, faComments, faUsersRays, faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faFolder, faComments, faUsersRays, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import styled from 'styled-components';
 import FolderGroup from './FolderGroup';
@@ -43,13 +43,13 @@ export default function Wallpapers() {
           <MidBox>
 
             <MainBox>
-              <FolderGroup icon={faUsersRays} title={"매칭"} />
+              <FolderGroup icon={faUserPlus} title={"매칭"} />
             </MainBox>
 
           </MidBox>
           <MidBox>
-            <MainBox onClick={() => openModal("닭")}>
-              <FolderGroup icon={faFolder} title={"닭"} />
+            <MainBox>
+              <FolderGroup icon={faUsersRays} title={"그룹"} />
             </MainBox>
           </MidBox>
         </LeftBox>

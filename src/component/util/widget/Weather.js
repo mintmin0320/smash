@@ -72,7 +72,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fff;
+  background-color: #EFFBFB;
 `
 
 const SkyState = styled.div`

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faFolder, faComments, faUsersRays, faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faComments, faUsersRays, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import Link from 'next/link';
 import Router from "next/router";
@@ -82,14 +82,16 @@ export default function Home() {
           <MidBox>
             <Link href="/match" legacyBehavior>
               <MainBox>
-                <FolderGroup icon={faUsersRays} title={"매칭"} />
+                <FolderGroup icon={faUserPlus} title={"매칭"} />
               </MainBox>
             </Link>
           </MidBox>
           <MidBox>
-            <MainBox onClick={() => openModal("닭")}>
-              <FolderGroup icon={faFolder} title={"닭"} />
-            </MainBox>
+            <Link href="/group" legacyBehavior>
+              <MainBox>
+                <FolderGroup icon={faUsersRays} title={"그룹"} />
+              </MainBox>
+            </Link>
           </MidBox>
         </LeftBox>
         <RightBox>
@@ -184,8 +186,7 @@ const RightBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-color: rebeccapurple; */
-  
+  /* background-color: rebeccapurple; */  
 `
 
 const RightTop = styled.div`
@@ -203,7 +204,7 @@ const Slide = styled.div`
 
 const Widget = styled.div`
   width: 25%;
-  height: 100%;
+  height: 60%;
   display: flex;
   justify-content: center;
   /* border-left: solid 1px black; */
@@ -211,7 +212,7 @@ const Widget = styled.div`
 
 const WeatherBox = styled.div`
   width: 100%;
-  height: 60%;
+  height: 100%;
   /* border-bottom: solid 1px black; */
 
   @media ( max-width: 1500px ) {

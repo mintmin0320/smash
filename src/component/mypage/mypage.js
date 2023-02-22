@@ -44,19 +44,24 @@ export default function Mypage() {
             {userId}
           </IdBox>
           <LocationBox>
-            {/* 거주지 */}
           </LocationBox>
         </InfoBox>
       </LeftBox>
       <RightBox>
         <TopBox>
-
+          <MyInfo>
+            여기에는 회원가입 시  자기소개 같은 느낌으로다가
+          </MyInfo>
         </TopBox>
         <BottomBox>
           <TitleBox>
             Group
           </TitleBox>
-
+          <MyGroupList>
+            <MyGroup>
+              여기에 코테 뱃지처럼 현재 그룹 표시하자..
+            </MyGroup>
+          </MyGroupList>
 
         </BottomBox>
       </RightBox>
@@ -140,6 +145,15 @@ const RightBox = styled.div`
 const TopBox = styled.div`
   width: 100%;
   height: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const MyInfo = styled.div`
+  width: 95%;
+  height: 90%;
+  border: solid 1px black;
 `
 
 const BottomBox = styled.div`
@@ -160,9 +174,16 @@ const TitleBox = styled.div`
   border-bottom: solid 1px #D8D8D8;
 `
 
-const InfoBody = styled.div`
-  width: 50%;
-  height: 100%;
+const MyGroupList = styled.div`
+  width: 95%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+`
+
+const MyGroup = styled.div`
+  width: 100%;
+  height: 95%;
 `
 
 const TextBox = styled.div`
