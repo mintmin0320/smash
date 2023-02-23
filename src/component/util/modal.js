@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Mypage from '../mypage/Mypage';
 import Community from '../community/Community';
 import Match from '../match/Match';
+import GroupPage from '../group/GroupPage';
 
 export default function Modal(props) {
   const { open, close, header } = props;
@@ -34,6 +35,11 @@ export default function Modal(props) {
               {header === "매칭" && (
                 <MypageBox>
                   <Match />
+                </MypageBox>
+              )}
+              {header === "그룹" && (
+                <MypageBox>
+                  <GroupPage />
                 </MypageBox>
               )}
             </Main>

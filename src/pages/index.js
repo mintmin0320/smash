@@ -101,7 +101,7 @@ export default function Home() {
             </Slide>
             <Widget>
               <WeatherBox>
-                {/* <Weather /> */}
+                <Weather />
               </WeatherBox>
             </Widget>
           </RightTop>

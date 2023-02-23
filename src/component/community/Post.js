@@ -26,7 +26,7 @@ export default function Post(props) {
           ...state,
           title: res.data.result.title,
           body: res.data.result.body,
-          postId: res.data.result.author.userId,
+          postId: res.data.result.userId,
           date: res.data.result.date,
         });
         console.log("게시물 조회 성공");
