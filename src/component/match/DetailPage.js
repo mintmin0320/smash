@@ -102,7 +102,7 @@ export default function DetailPage(props) {
       <TopBox>
         <TitleBox>
           <Title>
-            {state.title}  [{state.category}]
+            [ {state.category} ] {state.title}
           </Title>
         </TitleBox>
         <InfoBox>

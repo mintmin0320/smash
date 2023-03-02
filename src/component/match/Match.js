@@ -135,7 +135,8 @@ export default function Match() {
   }
 
   const getSearchTitle = async () => {
-    const url = `/match/${state.keyword}`
+    console.log(state.keyword)
+    const url = `/match/search/${state.keyword}`
     console.log(url);
     const res = await axios.get(url);
     console.log(res);

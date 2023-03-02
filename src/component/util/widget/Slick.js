@@ -12,7 +12,7 @@ export default function Slick() {
     infinite: true, // 무한으로 즐기게
     speed: 500,
     autoplay: true,
-    autoplaySpeed: 6000,
+    autoplaySpeed: 5000,
     slidesToShow: 1, //1장씩 보이게 해주세요
     // slidesToScroll: 1, //1장씩 넘어가세요
   };

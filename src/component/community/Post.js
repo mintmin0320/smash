@@ -44,7 +44,7 @@ export default function Post(props) {
     const url = `/post/delete`
     const res = await axios.delete(url, {
       data: {
-        postId: state.postId,
+        postId: props.postId,
       }
     })
     console.log(res);
