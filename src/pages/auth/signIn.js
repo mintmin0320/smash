@@ -33,9 +33,18 @@ export default function SignIn() {
     });
   };
 
+  const handleInputBack = (e) => {
+    router.push("/auth");
+
+  };
+
   const handleEnterPress = (params, e) => {
     if (e.key === 'Enter' && e.target.value !== '') {
-      if (params === 'id') {
+      console.log(state.userId)
+      if (state.userId === '/') {
+        handleInputBack();
+      }
+      else if (params === 'id') {
         handleIdCheck();
         // if (e.target.value === 'hamin') {
         //   setState({
@@ -52,7 +61,7 @@ export default function SignIn() {
         //   });
         // }
       }
-      else {
+      else if (params === 'pw') {
         handlePwCheck();
         // if (e.target.value === '1234') {
         //   setState({

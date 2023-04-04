@@ -11,6 +11,7 @@ export default function MenuTools() {
   const day = now.getDay();
   const dayList = ['일', '월', '화', '수', '목', '금', '토'];
   let hour = now.getHours();
+  let minutes = now.getMinutes();
   const meridiem = hour <= 12 ? '오전' : '오후';
   hour = hour <= 12 ? hour : hour - 12;
   return (
@@ -20,7 +21,7 @@ export default function MenuTools() {
       </ToolMenu>
       <CenterMenu />
       <WidgetMenu>
-        {month}월 {date}일 ({dayList[day]}) {meridiem} {hour}:{ }
+        {month}월 {date}일 ({dayList[day]}) {meridiem} {hour}:{minutes}
       </WidgetMenu>
     </React.Fragment >
   )

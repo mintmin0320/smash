@@ -6,7 +6,6 @@ import Link from 'next/link';
 import Title from '../../component/util/Title'
 import MenuBar from '../../component/util/MenuBar'
 
-
 export default function SignUp() {
   let router = useRouter();
   const inputFocus = useRef(null);
@@ -48,13 +47,10 @@ export default function SignUp() {
           ...state,
           result: true,
         });
-
-        // setTimeout(() => {
         router.push("/auth");
-        // }, 700);
       }
       else {
-        console.log("2");
+        console.log("실패");
         setState({
           ...state,
           result: false,
@@ -99,6 +95,28 @@ export default function SignUp() {
             />
             <br />
             <br />
+            <Input
+              type="text"
+              value={state.userId}
+              name="userId"
+              onChange={handleInputChange}
+              maxLength={10}
+              required={true}
+              placeholder="Enter your Name. "
+              ref={inputFocus}
+            />
+            <br />
+            <br />
+            <Textarea
+              type="text"
+              value={state.postBody}
+              name="postBody"
+              onChange={handleInputChange}
+              placeholder="Enter your short Bio"
+              maxLength={800}
+            />
+            <br />
+            <br />
             <SignUpBox>
               <SignUpButton>
                 <SignUpText>Sign Up</SignUpText>
@@ -128,7 +146,7 @@ const Container = styled.div`
 
 const Wrap = styled.div`
   width: 50%;
-  height: 65%;
+  height: 75%;
   display: flex;
   flex-direction: column;
   border: solid 1px black;
@@ -192,6 +210,25 @@ const Input = styled.input`
 
   &:focus{
     outline: none;
+  }
+`
+
+const Textarea = styled.textarea`
+  font-size: 18px;
+  color: white;
+  border: none;
+  width: 100%;
+  height: 20%;
+  border: dashed 1px #F2F2F2;
+  display: flex;
+  white-space: pre-line;
+  background: black;
+
+  &:focus{
+    outline: none;
+  }
+  &::placeholder{
+    font-size: 20px;
   }
 `
 

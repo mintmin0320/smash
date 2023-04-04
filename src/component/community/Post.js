@@ -50,11 +50,10 @@ export default function Post(props) {
     console.log(res);
     try {
       if (res.data.result) {
-        alert("삭제완료!");
-        window.location.reload();
+        console.log("삭제완료!");
       }
       else {
-        alert("삭제실패!");
+        console.log("삭제실패!");
       }
     } catch (error) {
       console.log(error);
