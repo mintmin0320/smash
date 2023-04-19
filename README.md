@@ -26,9 +26,22 @@
 </div>
 <br />
 <div align="center">
-<b>auth page</b>
+<b>Login page</b>
 
-![login](https://user-images.githubusercontent.com/114549939/209595519-986102b9-53ad-45b7-a0ee-896bd076e3c9.png)
+![auth_login](https://user-images.githubusercontent.com/114549939/232966012-b5dc54e9-4c35-40e0-b0eb-1df397175197.gif)
+<br />
+<br />
+
+<b>Index page</b>
+![스크린샷 2023-04-19 오후 1 26 54](https://user-images.githubusercontent.com/114549939/232966968-6119969e-fbfa-4d1d-b5a8-d8066030ea6c.png)
+<br />
+<br />
+
+<b>Matching page</b>
+![스크린샷 2023-04-19 오후 1 29 59](https://user-images.githubusercontent.com/114549939/232967322-ac074094-25cc-4a00-9de3-4c1149d7dad5.png)
+
+
+
 
 </div>
 
