@@ -8,7 +8,7 @@
 </div>  
 <br/>
 
-<div align="center">📕Framework & Library & Platform📕</div>
+<div align="center">📕Framework & Library📕</div>
 <div align="center">
   <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white"/>
   <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white"/>
